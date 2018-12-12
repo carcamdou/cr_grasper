@@ -1,0 +1,38 @@
+-- ROSTOPIC PUB
+
+	#'j33_joint' -> F3-Fingertip (NO MOTOR)
+	#'j32_joint' -> F3-Base
+	#
+	#'j11_joint' -> F1-Spread
+	#'j12_joint' -> F1-Base
+	#'j13_joint' -> F1-Fingertip (NO MOTOR)
+	#
+	#'j21_joint' -> F2-Spread
+	#'j22_joint' -> F2-Base
+	#'j23_joint' -> F2-Fingertip (NO MOTOR)
+	
+	# j11_joint and j21_joint use the same motor
+
+
+rostopic pub /bhand_node/command sensor_msgs/JointState "header:
+  seq: 0
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: ''
+name: ['j11_joint', 'j32_joint', 'j12_joint', 'j22_joint']
+position: [0.5 , 0.5, 1.0, 1.5]
+velocity: [0]
+effort: [0]" 
+
+
+rostopic pub /bhand_node/command sensor_msgs/JointState "header:
+  seq: 0
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: ''
+name: ['j11_joint', 'j32_joint', 'j12_joint', 'j22_joint']
+position: [0 , 0, 0, 0]
+velocity: [0]
+effort: [0]" 
+
+--- ROSSERVICE 
+# Inits the hand
+rosservice call /bhand_node/actions "action: 1"

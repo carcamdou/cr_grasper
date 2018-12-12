@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package>
+  <name>bhand_controller</name>
+  <version>0.1.1</version>
+  <description>The bhand_controller package is intended to control the Barrett Hand</description>
+
+  <maintainer email="rnavarro@robotnik.es">Román Navarro</maintainer>
+  <maintainer email="jarino@robotnik.es">Jorge Ariño</maintainer>
+  
+  <author email="rnavarro@robotnik.es">Román Navarro</author>
+  <author email="jarino@robotnik.es">Jorge Ariño</author>
+
+  <license>BSD</license>
+
+  <url type="website">http://wiki.ros.org/bhand_controller</url>
+  <url type="repository">https://github.com/RobotnikAutomation/barrett_hand.git</url>
+  <url type="bugtracker">https://github.com/RobotnikAutomation/barrett_hand/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>genmsg</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>genmsg</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+
+</package>

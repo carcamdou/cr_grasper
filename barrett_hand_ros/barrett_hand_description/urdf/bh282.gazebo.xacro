@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="bh_gazebo" params="name">
+
+	<gazebo>
+	   	<plugin name="mimic_plugin" filename="libgazebo_mimic_plugin.so">
+       		   <joint>${name}_j11_joint</joint>
+       		   <mimicJoint>${name}_j21_joint</mimicJoint>
+       		   <multiplier>1</multiplier>
+       		</plugin>
+        </gazebo> 
+
+	<gazebo>
+	    	<plugin name="mimic_plugin" filename="libgazebo_mimic_plugin.so">
+       		   <joint>${name}_j12_joint</joint>
+       		   <mimicJoint>${name}_j13_joint</mimicJoint>
+       		   <multiplier>0.344</multiplier>
+       		</plugin>
+        </gazebo> 
+
+	<gazebo>
+	    	<plugin name="mimic_plugin" filename="libgazebo_mimic_plugin.so">
+       		   <joint>${name}_j22_joint</joint>
+       		   <mimicJoint>${name}_j23_joint</mimicJoint>
+       		   <multiplier>0.344</multiplier>
+       		</plugin>
+        </gazebo> 
+
+	<gazebo>
+	    	<plugin name="mimic_plugin" filename="libgazebo_mimic_plugin.so">
+       		   <joint>${name}_j32_joint</joint>
+       		   <mimicJoint>${name}_j33_joint</mimicJoint>
+       		   <multiplier>0.344</multiplier>
+       		</plugin>
+        </gazebo> 
+
+	<gazebo reference="${name}_base_link">
+		<material>Gazebo/White</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_31_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_32_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_33_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_11_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_12_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_13_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+		
+	<gazebo reference="${name}_finger_21_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_22_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+	<gazebo reference="${name}_finger_23_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>False</turnGravityOff>
+	</gazebo>
+
+  </xacro:macro>
+</robot>

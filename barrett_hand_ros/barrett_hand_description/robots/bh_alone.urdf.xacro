@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot name="bhand" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+
+	<!-- Available choices: bh282.urdf.xacro, bh280.urdf.xacro -->	
+	<xacro:include filename="$(find barrett_hand_description)/urdf/bh282.urdf.xacro" />
+
+	<!-- z-coordinate is not 0 because otherwise the hand base tilts when the simulation is started -->
+	<link name="base_link">
+		<visual>
+		  <origin xyz="0 0 0.01" rpy="0 0 0" />
+		  <geometry>
+			 <box size="0.001 0.001 0.001" />
+		  </geometry>
+		</visual>
+
+		<collision>
+		  <origin xyz="0 0 0.01" rpy="0 0 0" />
+		  <geometry>
+			<box size="0.001 0.001 0.001" />
+		  </geometry> 
+		</collision>
+	</link>
+
+	<joint name="hand_joint" type="fixed">
+		 <origin xyz="0 0 0" rpy="0 0 0" />
+		 <parent link="base_link"/>
+		 <child link="hand_base_link"/>
+	</joint>  
+
+	<link name="hand_base_link"/>
+
+	<xacro:bhand_macro name="bh" parent="hand_base_link">
+		<origin xyz="0 0 0" rpy="0 0 0" />
+	</xacro:bhand_macro>
+	
+	<gazebo>
+	    <plugin name="ros_control" filename="libgazebo_ros_control.so">
+	       <robotNamespace>/</robotNamespace>
+	       <controlPeriod>0.001</controlPeriod>
+	       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+	    </plugin>
+    </gazebo>
+	
+</robot>
+

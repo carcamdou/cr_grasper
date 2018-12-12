@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find barrett_hand_description)/robots/bh_alone.urdf.xacro'" />
+
+</launch>

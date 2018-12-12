@@ -1,0 +1,455 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+
+	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
+	<xacro:include filename="$(find barrett_hand_description)/urdf/bh282.gazebo.xacro" />
+
+	<!-- Constants for robot dimensions -->
+	<xacro:property name="PI" value="3.1415926535897931"/>
+	<xacro:property name="PI_2" value="1.570796327"/>
+	<xacro:property name="joint_damping" value="100.0" />
+	<xacro:property name="joint_friction" value="1.0" />
+	<xacro:property name="joint_effort_limit" value="30.0" />
+	<xacro:property name="joint_velocity_limit" value="2.0" />
+	<xacro:property name="mechanical_reduction" value="1.0" />
+  
+	<xacro:macro name="bhand_macro" params="parent name *origin">
+		
+		<joint name="${name}_base_joint" type="fixed">
+			<insert_block name="origin"/>
+			<parent link="${parent}"/>
+			<child link="${name}_base_link"/>
+		</joint>  
+		
+		<!-- HAND BASE_LINK (RED) -->
+		<link name="${name}_base_link">
+			<inertial>
+			  <mass value="3.0" />
+			  <origin xyz="0 0 0" />
+			  <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="1.0"  iyz="0.0"  izz="1.0" />
+			</inertial>
+			<visual>
+			   <origin xyz="0 0 0" rpy="0 0 0" />
+			   <geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/palm_282.dae"/>
+			   </geometry>
+			   <material name="Grey">
+				  <color rgba="0.75 0.75 0.75 1.0"/>
+			   </material>
+			</visual>
+			<collision>
+			   <origin xyz="0 0 0" rpy="0 0 0 " />
+			   <geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/palm_282.dae"/>
+			   </geometry>
+			   <contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+			</collision>     
+		</link>
+
+		
+		<!-- finger 3 -->
+		<!-- finger 31 link -->
+		<link name="${name}_finger_31_link">
+		 <inertial>
+		   <mass value="0.1"/>
+		   <origin xyz="-0.046 0 0" rpy="0 0 0"/>
+		   <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		 </inertial>
+		 <visual>
+		   <origin xyz="-0.04 0 0" rpy="0 0 0" />
+		   <geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/knuckle_fixed.dae" />
+		   </geometry>
+		   <material name="Black"/>
+		 </visual>		
+		 <collision>
+		   <origin xyz="-0.04 0 0" rpy="0 0 0" />
+		   <geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/knuckle_fixed.dae"/>
+		   </geometry>
+		   <contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+		  </collision>
+		</link>
+
+		<!-- joint between BH_palm_link and BH_finger_31_link -->
+		<!-- finger3 is the center finger and is fixed -->
+		<joint name="${name}_j31_joint" type="fixed">
+			<parent link="${name}_base_link"/>
+			<child link="${name}_finger_31_link"/>
+			<origin xyz="0 0 0.0252" rpy="0 0 -${PI_2}"/>
+		</joint>
+		
+		<!-- finger 32 link -->
+		<link name="${name}_finger_32_link">
+			 <inertial>
+				<mass value="0.1"/>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			 </inertial>
+			 <visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/finger.dae" />
+				</geometry>
+				<material name="Blue" />
+			 </visual>		
+			 <collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/finger.dae" />
+				</geometry>
+				<contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+			 </collision>
+		</link>
+
+		<!-- joint between BH_finger_31_link and BH_finger_32_link -->
+		<joint name="${name}_j32_joint" type="revolute">
+			<parent link="${name}_finger_31_link"/>
+			<child link="${name}_finger_32_link"/>
+			<origin	xyz="-0.05 0 0.0339"
+				rpy="1.5708 -8.8281E-17 0" />
+			<axis xyz="0 0 -1"/>
+			<limit effort="${joint_effort_limit}" lower="0.0" upper="2.44" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j32_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j32_joint">
+			   <hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j32">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		<!-- finger 33 link -->
+		<link name="${name}_finger_33_link">
+		 <inertial>
+			<mass value="0.1"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		 </inertial>
+		 <visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/finger_tip.dae" />
+			</geometry>
+			<material name="Blue" />
+		 </visual>		
+		 <collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/finger_tip.dae" />
+			</geometry>
+			<contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+		 </collision>
+		</link>
+
+		<!-- joint between BH_finger_32_link and BH_finger_33_link -->
+		<joint name="${name}_j33_joint" type="revolute">
+			<parent link="${name}_finger_32_link"/>
+			<child link="${name}_finger_33_link"/>
+			<origin xyz="-0.069936 0.003 0" rpy="0 0 0" />
+			<axis xyz="0 0 -1"/>
+			<mimic joint="${name}_j32_joint" multiplier="${0.84/2.44}"/>
+			<limit effort="${joint_effort_limit}" lower="0.0" upper="0.84" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j33_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j33_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j33">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		<!-- finger 1 -->
+		<!-- finger 11 link -->
+		<link name="${name}_finger_11_link">
+			<inertial>
+			  <mass value="0.1"/>
+			  <origin xyz="-0.046 0 0" rpy="0 0 0"/>
+			  <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			</inertial>
+			<visual>
+			  <origin xyz="0 0 0" rpy="0 0 0" />
+			  <geometry>
+				 <mesh filename="package://barrett_hand_description/meshes/knuckle.dae" />
+			  </geometry>
+			  <material name="Green" />
+			</visual>
+			<collision>
+			  <origin xyz="0 0 0" rpy="0 0 0" />
+			  <geometry>
+				<mesh filename="package://barrett_hand_description/meshes/knuckle.dae" />
+			  </geometry>
+			</collision>
+		</link>
+
+		<!-- joint between BH_palm_link and BH_finger_11_link -->
+		<joint name="${name}_j11_joint" type="revolute">
+			<parent link="${name}_base_link"/>
+			<child link="${name}_finger_11_link"/>
+			<origin xyz="-0.025 0 0.0252" rpy="0 0 1.5708" />
+			<axis xyz="0 0 -1"/>
+			<limit effort="${joint_effort_limit}" lower="0" upper="3.1416" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j11_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j11_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j11">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		<!-- finger 12 link -->
+		<link name="${name}_finger_12_link">
+			 <inertial>
+				<mass value="0.1"/>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			 </inertial>
+			 <visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/finger.dae" />
+				</geometry>
+				<material name="Blue" />
+			 </visual>		
+			 <collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/finger.dae" />
+				</geometry>
+				<contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+			 </collision>
+		</link>
+
+		<!-- joint between BH_finger_11_link and BH_finger_12_link -->
+		<joint name="${name}_j12_joint" type="revolute">
+			<parent link="${name}_finger_11_link"/>
+			<child link="${name}_finger_12_link"/>
+			<origin	xyz="-0.05 0 0.0339"
+				rpy="1.5708 0 0" />
+			<axis xyz="0 0 -1"/>
+			<limit effort="${joint_effort_limit}" lower="0.0" upper="2.44" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j12_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j12_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j12">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		<!-- finger 13 link -->
+		<link name="${name}_finger_13_link">
+		 <inertial>
+			<mass value="0.1"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		 </inertial>
+		 <visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/finger_tip.dae" />
+			</geometry>
+			<material name="Blue" />
+		 </visual>		
+		 <collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/finger_tip.dae" />
+			</geometry>
+			<contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+		 </collision>
+		</link>
+
+		<!-- joint between BH_finger_12_link and BH_finger_13_link -->
+		<joint name="${name}_j13_joint" type="revolute">
+			<parent link="${name}_finger_12_link"/>
+			<child link="${name}_finger_13_link"/>
+			<origin xyz="-0.069936 0.003 0" rpy="0 0 0" />
+			<axis xyz="0 0 -1"/>
+			<mimic joint="${name}_j12_joint" multiplier="${0.84/2.44}"/>
+			<limit effort="${joint_effort_limit}" lower="0.0" upper="0.84" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j13_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j13_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j13">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		
+		<!-- finger 2 -->
+		<!-- finger 21 link -->
+		<link name="${name}_finger_21_link">
+			<inertial>
+			  <mass value="0.1"/>
+			  <origin xyz="-0.046 0 0" rpy="0 0 0"/>
+			  <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			</inertial>
+			<visual>
+			  <origin xyz="0 0 0" rpy="0 0 0" />
+			  <geometry>
+				 <mesh filename="package://barrett_hand_description/meshes/knuckle.dae" />
+			  </geometry>
+			  <material name="Green" />
+			</visual>
+			<collision>
+			  <origin xyz="0 0 0" rpy="0 0 0" />
+			  <geometry>
+				<mesh filename="package://barrett_hand_description/meshes/knuckle.dae" />
+			  </geometry>
+			</collision>
+		</link>
+
+		<!-- joint between BH_palm_link and BH_finger_21_link -->
+		<joint name="${name}_j21_joint" type="revolute">
+			<parent link="${name}_base_link"/>
+			<child link="${name}_finger_21_link"/>
+			<origin xyz="0.025 0 0.0252" rpy="0 0 1.5708" />
+			<axis xyz="0 0 1"/>
+			<mimic joint="${name}_j11_joint" multiplier="1"/>
+			<limit effort="${joint_effort_limit}" lower="0" upper="3.1416" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j21_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j21_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j21">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		<!-- finger 12 link -->
+		<link name="${name}_finger_22_link">
+			 <inertial>
+				<mass value="0.1"/>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			 </inertial>
+			 <visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/finger.dae" />
+				</geometry>
+				<material name="Blue" />
+			 </visual>		
+			 <collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+				  <mesh filename="package://barrett_hand_description/meshes/finger.dae" />
+				</geometry>
+				<contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+			 </collision>
+		</link>
+
+		<!-- joint between BH_finger_21_link and BH_finger_22_link -->
+		<joint name="${name}_j22_joint" type="revolute">
+			<parent link="${name}_finger_21_link"/>
+			<child link="${name}_finger_22_link"/>
+			<origin	xyz="-0.05 0 0.0339"
+				rpy="1.5708 -8.8281E-17 0" />
+			<axis xyz="0 0 -1"/>
+			<limit effort="${joint_effort_limit}" lower="0.0" upper="2.44" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j22_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j22_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j22">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>
+		
+		<!-- finger 23 link -->
+		<link name="${name}_finger_23_link">
+		 <inertial>
+			<mass value="0.1"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+		 </inertial>
+		 <visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/finger_tip.dae" />
+			</geometry>
+			<material name="Blue" />
+		 </visual>		
+		 <collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+			  <mesh filename="package://barrett_hand_description/meshes/finger_tip.dae" />
+			</geometry>
+			<contact_coefficients kd="1.0" kp="1000.0" mu="0"/>
+		 </collision>
+		</link>
+
+		<!-- joint between BH_finger_22_link and BH_finger_23_link -->
+		<joint name="${name}_j23_joint" type="revolute">
+			<parent link="${name}_finger_22_link"/>
+			<child link="${name}_finger_23_link"/>
+			<origin xyz="-0.069936 0.003 0" rpy="0 0 0" />
+			<axis xyz="0 0 -1"/>
+			<mimic joint="${name}_j22_joint" multiplier="${0.84/2.44}"/>
+			<limit effort="${joint_effort_limit}" lower="0.0" upper="0.84" velocity="${joint_velocity_limit}"/>
+			<dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+		</joint>
+
+		<transmission name="${name}_j23_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="${name}_j23_joint">
+				<hardwareInterface>PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="${name}_j23">
+			  <hardwareInterface>PositionJointInterface</hardwareInterface>
+			  <mechanicalReduction>1</mechanicalReduction>
+			  <motorTorqueConstant>1</motorTorqueConstant>
+			</actuator>
+		</transmission>	
+		
+		<xacro:bh_gazebo name="${name}"/>
+		
+	</xacro:macro>
+	
+</robot>

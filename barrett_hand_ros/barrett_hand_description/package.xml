@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>barrett_hand_description</name>
+  <version>0.1.0</version>
+  <description>The barrett_hand_description package</description>
+
+  <maintainer email="egambaro@robotnik.es">Elena Gambaro</maintainer>
+  <maintainer email="rnavarro@robotnik.es">Román Navarro</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://wiki.ros.org/barrett_hand_description</url>
+  <url type="repository">https://github.com/RobotnikAutomation/barrett_hand_common.git</url>
+  <url type="bugtracker">https://github.com/RobotnikAutomation/barrett_hand_common/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>

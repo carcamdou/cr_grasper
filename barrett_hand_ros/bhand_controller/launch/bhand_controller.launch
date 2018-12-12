@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  <node pkg="bhand_controller" type="bhand_node.py" name="bhand_node" output="screen">
+      <rosparam command="load" file="$(find bhand_controller)/config/bhand.yaml" />
+      <param name="topic_state" value="state" />
+      <param name="port" value="/dev/pcan32" />
+      <param name="tactile_sensors" value="True" />
+  </node>
+ 
+</launch>

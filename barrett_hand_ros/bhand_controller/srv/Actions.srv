@@ -1,0 +1,4 @@
+# Action ID defined in bhand/msg/Service.msg
+int32 action
+---
+bool ret
