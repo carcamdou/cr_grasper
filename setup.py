@@ -3,9 +3,12 @@ from setuptools import setup
 setup(name='cr_grasper',
       version='0.1',
       description='columbia robotics grasping simulator',
-      url='http://mbxsΩgithub.com/storborg/funniest',
-      author='Flying Circus',
-      author_email='flyingcircus@example.com',
+      url='https://github.com/carcamdou/cr_grasper',
+      author='Carlyn Dougherty',
+      author_email='ccd2134@columbia.edu',
       license='MIT',
-      packages=['funniest'],
+      packages=['cr_grasper'],
+      install_requires=[
+            'numpy',
+      ],
       zip_safe=False)
