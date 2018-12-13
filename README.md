@@ -1,14 +1,14 @@
-### __README: Robot Graspit! Project__  
+# __README: Robot Graspit! Project__  
 __Carlyn Dougherty (ccd2134@columbia.edu)__
 
 
-Main Idea: replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet (https://pybullet.org/wordpress/) to 
+__Main Idea:__ replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet (https://pybullet.org/wordpress/) to 
 
 
-### Method #1: List Planner: 
+## Method #1: List Planner: 
 The goal here is to get the most simple form of a grasp planner working first, then move on to more sophisticated methods
 
-####To Use:
+##To Use:
 * __Edit + run write_config__  
     - file_paths
         - relative path from grasper.py to hand URDF file
