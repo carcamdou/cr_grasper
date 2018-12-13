@@ -8,7 +8,7 @@ __Main Idea:__ replace [Graspit!](https://graspit-simulator.github.io/) with a s
 ## Method #1: List Planner: 
 The goal here is to get the most simple form of a grasp planner working first, then move on to more sophisticated methods
 
-##To Use:
+__To Use:__
 * __Edit + run write_config__  
     - file_paths
         - relative path from grasper.py to hand URDF file
@@ -26,7 +26,6 @@ The goal here is to get the most simple form of a grasp planner working first, t
 
 
 
-##Notes: 
 
 ##### Notes on URDFs: (based on needs for  barrett hand)
 
