@@ -2,7 +2,78 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b65014d3-297d-45db-8ec7-1a4cfae2e43c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/cr_grasper/hand_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/CHANGELOG.rst" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/CHANGELOG.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/launch/bh_alone.launch" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/launch/bh_alone.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/launch/bh_description.launch" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/launch/bh_description.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/finger.dae" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/finger.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/finger_tip.dae" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/finger_tip.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/knuckle.dae" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/knuckle.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/knuckle_fixed.dae" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/knuckle_fixed.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/palm_280.dae" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/palm_280.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/palm_282.dae" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/palm_282.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/stl/adapter.stl" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/stl/adapter.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/stl/finger.stl" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/stl/finger.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/stl/finger_tip.stl" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/stl/finger_tip.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/stl/knucke.stl" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/stl/knucke.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/stl/palm_280.stl" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/stl/palm_280.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/meshes/stl/palm_282.stl" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/meshes/stl/palm_282.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/package.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/robots/bh_alone.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/robots/bh_alone.urdf.xacro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/bh.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/bh.urdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/bh280.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/bh280.urdf.xacro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/bh280_tactile.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/bh280_tactile.urdf.xacro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/bh282.gazebo.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/bh282.gazebo.xacro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/bh282.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/bh282.urdf.xacro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/convert-tactile-to-urdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/convert-tactile-to-urdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_hand_description/urdf/model_to_tact_array_info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RobotURDFs/barrett_hand_description/urdf/model_to_tact_array_info.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_tactile_msgs/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_tactile_msgs/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_tactile_msgs/msg/TactileInfo.msg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_tactile_msgs/package.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/msg/TactileContactFrames.msg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/package.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/scripts/barrett_follow_trajectory_as.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/scripts/tactile_maps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/barrett_trajectory_action_server/srv/GetTactileContacts.srv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/CHANGELOG.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/config/bhand.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/examples/rostopic_pub.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/launch/bhand_controller.launch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/msg/Service.msg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/msg/State.msg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/msg/TactileArray.msg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/package.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/src/bhand_controller/bhand_node.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/src/bhand_controller/puck_properties_consts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/src/bhand_controller/pyHand_api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/srv/Actions.srv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/bhand_controller/srv/SetControlMode.srv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/CHANGELOG.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/package.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/resource/BHandGUI.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/resource/green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/resource/red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/scripts/rqt_bhand" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/src/rqt_bhand/rqt_bhand.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barrett_hand_ros/rqt_bhand/src/rqt_bhand/tact_maps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/cr_grasper/bh.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/cr_grasper/bh.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cr_grasper/grasper.py" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/grasper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cr_grasper/write_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/write_config.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,73 +85,78 @@
     <session id="-1579835684">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="1" />
-          <entry key="ini" value="2" />
-          <entry key="md" value="2" />
-          <entry key="py" value="10" />
+          <entry key="ini" value="4" />
+          <entry key="md" value="3" />
+          <entry key="py" value="14" />
+          <entry key="urdf" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Markdown" value="2" />
-          <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="10" />
+          <entry key="Markdown" value="3" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Python" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="LICENSE" value="19" />
           <entry key="dummy" value="29" />
-          <entry key="md" value="459" />
-          <entry key="py" value="1082" />
+          <entry key="ini" value="16" />
+          <entry key="md" value="460" />
+          <entry key="py" value="1722" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="459" />
-          <entry key="PLAIN_TEXT" value="48" />
-          <entry key="Python" value="1082" />
+          <entry key="Markdown" value="460" />
+          <entry key="PLAIN_TEXT" value="64" />
+          <entry key="Python" value="1722" />
         </counts>
       </usages-collector>
     </session>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="cr_grasper" />
+  </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="66" selection-start-line="66" selection-end-line="81" />
+            <state relative-caret-position="307">
+              <caret line="114" column="87" selection-start-line="114" selection-start-column="4" selection-end-line="114" selection-end-column="87" />
               <folding>
-                <element signature="e#898#918#0" expanded="true" />
+                <element signature="e#313#333#0" expanded="true" />
+                <marker date="1544734782745" expanded="true" signature="3856:3857" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="380">
-                <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-              </first_editor>
-              <second_editor />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cr_grasper/write_config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cr_grasper/config.ini">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cr_grasper/hand_info.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            <state relative-caret-position="30">
+              <caret line="2" column="72" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -101,6 +177,12 @@
       <find>time_limit</find>
       <find>maxForce</find>
       <find>robot_path</find>
+      <find>reset_hand</find>
+      <find>reset_ob</find>
+      <find>circle_set</find>
+      <find>reset_h</find>
+      <find>reset</find>
+      <find>reset_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,19 +195,23 @@
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/LICENSE" />
         <option value="$PROJECT_DIR$/cr_grasper/config.py" />
-        <option value="$PROJECT_DIR$/cr_grasper/write_config.py" />
         <option value="$PROJECT_DIR$/cr_grasper/crg.py" />
         <option value="$PROJECT_DIR$/cr_grasper/bh.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/URDF/box.urdf" />
+        <option value="$PROJECT_DIR$/cr_grasper/config.ini" />
+        <option value="$PROJECT_DIR$/cr_grasper/write_config.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/grasper.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/hand_info.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="438" />
     <option name="y" value="23" />
-    <option name="width" value="1002" />
+    <option name="width" value="1440" />
     <option name="height" value="877" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -142,12 +228,18 @@
             <path>
               <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
               <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
-              <item name="barrett_hand_ros" type="462c0819:PsiDirectoryNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
               <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="RobotURDFs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
               <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="RobotURDFs" type="462c0819:PsiDirectoryNode" />
+              <item name="finger_description" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -165,6 +257,7 @@
       <recent name="$PROJECT_DIR$/cr_grasper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hand_descriptions" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -180,28 +273,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.bh">
-    <configuration name="bh" type="PythonConfigurationType" factoryName="Python">
-      <module name="cr_grasper" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/local/bin/python3.6" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cr_grasper" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/grasper.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.hand_info">
     <configuration name="config" type="PythonConfigurationType" factoryName="Python">
       <module name="cr_grasper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -223,7 +295,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="crg" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="grasper" type="PythonConfigurationType" factoryName="Python">
       <module name="cr_grasper" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -235,7 +307,28 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/crg.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/grasper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hand_info" type="PythonConfigurationType" factoryName="Python">
+      <module name="cr_grasper" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cr_grasper" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/hand_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -245,9 +338,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.bh" />
+      <item itemvalue="Python.grasper" />
+      <item itemvalue="Python.hand_info" />
       <item itemvalue="Python.config" />
-      <item itemvalue="Python.crg" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -264,38 +357,38 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <frame x="1" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.121212125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.16208598" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" sideWeight="0.12897196" side_tool="true" weight="0.25581396" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31847134" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33375797" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.11205074" />
+      <window_info id="Favorites" order="0" sideWeight="0.12897196" side_tool="true" weight="0.25581396" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.87102807" visible="true" weight="0.25581396" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Python Console" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
-      <window_info anchor="bottom" id="Find" order="5" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.31847134" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3299363" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.33375797" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -309,13 +402,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cr_grasper/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/config.py" />
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -337,37 +424,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/crg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="33" column="64" selection-start-line="33" selection-start-column="64" selection-end-line="33" selection-end-column="64" />
-          <folding>
-            <element signature="e#898#918#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/configparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="764" column="8" selection-start-line="764" selection-start-column="8" selection-end-line="764" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/write_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/crg.py" />
     <entry file="file://$PROJECT_DIR$/MyNotes.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -376,23 +433,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ObjectURDFs/box.urdf" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="405">
+            <caret line="27" selection-start-line="27" selection-end-line="27" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ObjectURDFs/cube.urdf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RobotURDFs/finger_description/urdf/RH8D.urdf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7191" />
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/configparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="1191" selection-start-line="1191" selection-end-line="1191" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/write_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="66" selection-start-line="66" selection-end-line="81" />
+        <state relative-caret-position="307">
+          <caret line="114" column="87" selection-start-line="114" selection-start-column="4" selection-end-line="114" selection-end-column="87" />
           <folding>
-            <element signature="e#898#918#0" expanded="true" />
+            <element signature="e#313#333#0" expanded="true" />
+            <marker date="1544734782745" expanded="true" signature="3856:3857" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="380">
-            <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/cr_grasper/hand_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="72" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
         </state>
       </provider>
     </entry>

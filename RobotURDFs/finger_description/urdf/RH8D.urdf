@@ -1,0 +1,784 @@
+<robot name="RH8D">
+  <link name="base_link" />
+  <link name="base">
+    <inertial>
+      <origin xyz="-2.32485e-05 5.52515e-05 0.00231761" rpy="0 0 0"/>
+      <mass value="0.00544451"/>
+      <inertia ixx="5.66637e-07" ixy="1.64003e-10" ixz="-2.30068e-10" iyy="5.71758e-07" iyz="5.4677e-10" izz="1.12068e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="base_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="forearm">
+    <inertial>
+      <origin xyz="2.30433000001e-07 -0.0655374 -0.00282708" rpy="0 0 0"/>
+      <mass value="0.737868"/>
+      <inertia ixx="0.0013021" ixy="1.01472e-07" ixz="5.87405e-09" iyy="0.000679239" iyz="-1.22301e-05" izz="0.00145511"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0241628 -0.122588 -0.0023045" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/forearm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="forearm_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0241628 -0.122588 -0.0023045" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/forearm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="forearm__base" type="revolute">
+    <origin xyz="0 0 0.0005" rpy="-1.57079632679 0 0"/>
+    <axis xyz="0.0 -1.0 2.22044604925e-16"/>
+    <parent link="base"/>
+    <child link="forearm"/>
+    <limit effort="0.5" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="palm axis">
+    <inertial>
+      <origin xyz="0 0.009025 -0.01025" rpy="0 0 0"/>
+      <mass value="0.0484983"/>
+      <inertia ixx="9.46434e-06" ixy="0.0" ixz="0.0" iyy="1.22209e-05" iyz="-2.49433e-17" izz="1.71183e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.01025" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/palm axis.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="palm axis_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.01025" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/palm axis.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="palm axis__forearm" type="revolute">
+    <origin xyz="0 -0.165 -0.01525" rpy="-3.14159265359 0 -3.14159265359"/>
+    <axis xyz="-2.22044604925e-16 0.0 -1.0"/>
+    <parent link="forearm"/>
+    <child link="palm axis"/>
+    <limit effort="0.5" lower="-0.785398163397" upper="0.785398163397" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="palm">
+    <inertial>
+      <origin xyz="0.02226623 -0.04266 -0.00107953" rpy="0 0 0"/>
+      <mass value="0.0886716"/>
+      <inertia ixx="3.49499e-05" ixy="1.90978e-06" ixz="3.02331e-06" iyy="5.90827e-05" iyz="-2.26784e-07" izz="8.80157e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="16.7603 17.427 0.713666" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/palm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="palm_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="16.7603 17.427 0.713666" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/palm.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="palm__palm axis" type="revolute">
+    <origin xyz="-0.0265 0 -0.01025" rpy="0 0 0"/>
+    <axis xyz="-1.0 2.22044604925e-16 0.0"/>
+    <parent link="palm axis"/>
+    <child link="palm"/>
+    <limit effort="0.5" lower="-0.785398163397" upper="0.785398163397" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Rproximal">
+    <inertial>
+      <origin xyz="-0.00506265498327 0.000178411167835 -0.0113952992502" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532660458173 -0.00134315858259 -0.0128298354943" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Rproximal_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532660458173 -0.00134315858259 -0.0128298354943" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Rproximal__palm" type="revolute">
+    <origin xyz="0.044463 -0.081365 0.00148931" rpy="-1.83998062112 -0.070428847363 0.101332262919"/>
+    <axis xyz="-1.00000007251 -8.46220030541e-08 1.44225053858e-07"/>
+    <parent link="palm"/>
+    <child link="Rproximal"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Rmiddle">
+    <inertial>
+      <origin xyz="-0.0050627375168 0.000178703837342 -0.0113961050151" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532662722179 -0.00134303584663 -0.0128300831679" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Rmiddle_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532662722179 -0.00134303584663 -0.0128300831679" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Rmiddle__Rproximal" type="revolute">
+    <origin xyz="0 0 -0.0258747809103" rpy="-0.0872670609142 0 2.76912342671e-07"/>
+    <axis xyz="-1.00000007251 1.72767385245e-07 2.31542720386e-07"/>
+    <parent link="Rproximal"/>
+    <child link="Rmiddle"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Rtip">
+    <inertial>
+      <origin xyz="-0.00506262889447 0.000158864121429 -0.00949029810479" rpy="0 0 0"/>
+      <mass value="0.00398141"/>
+      <inertia ixx="2.27393e-07" ixy="-4.487e-12" ixz="-6.19169e-12" iyy="2.50732e-07" iyz="3.7689e-09" izz="1.09262e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506246565687 -4.09118144695e-07 7.45384128198e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Rtip_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506246565687 -4.09118144695e-07 7.45384128198e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Rtip__Rmiddle" type="revolute">
+    <origin xyz="0 2.25940697457e-07 -0.0258755491275" rpy="-0.0872662816218 1.12264697248e-07 -3.5745305372e-07"/>
+    <axis xyz="-1.00000007251 -1.94378654964e-07 1.02727742424e-07"/>
+    <parent link="Rmiddle"/>
+    <child link="Rtip"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Mproximal">
+    <inertial>
+      <origin xyz="-0.00506268032219 0.000178369758776 -0.0113951959251" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532660055243 -0.00134318776557 -0.0128295627043" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Mproximal_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532660055243 -0.00134318776557 -0.0128295627043" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Mproximal__palm" type="revolute">
+    <origin xyz="0.01971414 -0.082973 0.00076618" rpy="-1.83324870939 0.0859369188285 -0.0151906736407"/>
+    <axis xyz="-1.00000030441 -5.71235363176e-07 2.22119205119e-07"/>
+    <parent link="palm"/>
+    <child link="Mproximal"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Mmiddle">
+    <inertial>
+      <origin xyz="-0.00506269201108 0.000178473714736 -0.0113956264739" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532662940519 -0.001342939287 -0.012830098266" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Mmiddle_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532662940519 -0.001342939287 -0.012830098266" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Mmiddle__Mproximal" type="revolute">
+    <origin xyz="0 -2.41651877793e-07 -0.0258742142625" rpy="-0.0872661749543 2.70259221066e-07 3.1679265362e-07"/>
+    <axis xyz="-1.00000030441 -2.49278715942e-07 -7.0132973715e-08"/>
+    <parent link="Mproximal"/>
+    <child link="Mmiddle"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Mtip">
+    <inertial>
+      <origin xyz="-0.0050627478165 0.00015921993426 -0.00949104619276" rpy="0 0 0"/>
+      <mass value="0.00398141"/>
+      <inertia ixx="2.27393e-07" ixy="-4.487e-12" ixz="-6.19169e-12" iyy="2.50732e-07" iyz="3.7689e-09" izz="1.09262e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506245834339 -1.4490970493e-07 3.55767050764e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Mtip_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506245834339 -1.4490970493e-07 3.55767050764e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Mtip__Mmiddle" type="revolute">
+    <origin xyz="0 1.85177410031e-07 -0.0258754440497" rpy="-0.0872666641639 -2.30451794024e-07 1.75345278157e-07"/>
+    <axis xyz="-1.00000030441 -8.76247884616e-08 1.53265091958e-07"/>
+    <parent link="Mmiddle"/>
+    <child link="Mtip"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Pproximal">
+    <inertial>
+      <origin xyz="-0.00506265004772 0.000178471691603 -0.0113954440839" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532669695333 -0.00134327559708 -0.0128292006118" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Pproximal_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532669695333 -0.00134327559708 -0.0128292006118" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Pproximal__palm" type="revolute">
+    <origin xyz="0.0691264 -0.072128 0.0038631" rpy="-1.86212856709 -0.138702648968 0.204065548896"/>
+    <axis xyz="-0.999999718358 -2.63813422101e-07 -1.77932631934e-07"/>
+    <parent link="palm"/>
+    <child link="Pproximal"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Pmiddle">
+    <inertial>
+      <origin xyz="-0.00506271792241 0.000178454269957 -0.0113956275282" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532646642137 -0.00134299429342 -0.0128302748856" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Pmiddle_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532646642137 -0.00134299429342 -0.0128302748856" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Pmiddle__Pproximal" type="revolute">
+    <origin xyz="1.71429768873e-07 0 -0.0258743732015" rpy="-0.0872666026479 1.06320174575e-07 0"/>
+    <axis xyz="-0.999999718358 -2.69819360882e-07 -3.08944752836e-07"/>
+    <parent link="Pproximal"/>
+    <child link="Pmiddle"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Ptip">
+    <inertial>
+      <origin xyz="-0.00506265913629 0.000159136938405 -0.00949076905022" rpy="0 0 0"/>
+      <mass value="0.00398141"/>
+      <inertia ixx="2.27393e-07" ixy="-4.487e-12" ixz="-6.19169e-12" iyy="2.50732e-07" iyz="3.7689e-09" izz="1.09262e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506254619728 0 1.00217221743e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Ptip_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506254619728 0 1.00217221743e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Ptip__Pmiddle" type="revolute">
+    <origin xyz="0 0 -0.0258752741659" rpy="-0.0872659042327 2.27460324884e-07 1.07985789158e-07"/>
+    <axis xyz="-0.999999718358 -1.14467305121e-07 -5.48468494399e-07"/>
+    <parent link="Pmiddle"/>
+    <child link="Ptip"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="thumb base">
+    <inertial>
+      <origin xyz="5.41241550495e-07 0.0139591752938 0.00025370998152" rpy="0 0 0"/>
+      <mass value="0.00705621"/>
+      <inertia ixx="5.42596e-07" ixy="4.46196e-11" ixz="-1.43331e-11" iyy="3.55499e-07" iyz="4.00664e-08" izz="5.38335e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0.0145002326896 2.12529551097e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/thumb.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="thumb base_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0145002326896 2.12529551097e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/thumb.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="palm__thumb base" type="revolute">
+    <origin xyz="-0.0132983 -0.013942 0.0090401" rpy="-1.75712148701 1.30427457179 2.16321531663"/>
+    <axis xyz="7.47739294649e-08 -1.00000039555 -1.69572095365e-07"/>
+    <parent link="palm"/>
+    <child link="thumb base"/>
+    <limit effort="0.5" lower="0.0" upper="1.57079632679" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Tproximal">
+    <inertial>
+      <origin xyz="-0.00509118037371 -0.000108367330619 -0.00917567646424" rpy="0 0 0"/>
+      <mass value="0.00379261"/>
+      <inertia ixx="3.44891e-07" ixy="-5.85841e-09" ixz="-1.40349e-09" iyy="2.90581e-07" iyz="-9.57879e-09" izz="2.1814e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506247937312 1.51098425411e-07 -0.00864845498031" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_M.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Tproximal_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506247937312 1.51098425411e-07 -0.00864845498031" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_M.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Tproximal__thumb base" type="revolute">
+    <origin xyz="0.00506271141921 0.00574726795841 0.0111638055054" rpy="-2.69572490984 0 -3.23524184915e-07"/>
+    <axis xyz="-1.00000015905 4.04301755325e-07 -1.03967894405e-07"/>
+    <parent link="thumb base"/>
+    <child link="Tproximal"/>
+    <limit effort="0.5" lower="0.0" upper="1.57079632679" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Tmiddle">
+    <inertial>
+      <origin xyz="-0.00509145714593 -0.000109508075581 -0.00917619264503" rpy="0 0 0"/>
+      <mass value="0.00379261"/>
+      <inertia ixx="3.44891e-07" ixy="-5.85841e-09" ixz="-1.40349e-09" iyy="2.90581e-07" iyz="-9.57879e-09" izz="2.1814e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506255005155 -3.30490933204e-07 -0.00864867274502" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_M.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Tmiddle_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506255005155 -3.30490933204e-07 -0.00864867274502" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_M.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Tmiddle__Tproximal" type="revolute">
+    <origin xyz="1.61327491782e-07 6.88063125837e-07 -0.0215856949813" rpy="-0.00953533375442 -2.2361018211e-07 -5.28725690007e-07"/>
+    <axis xyz="-1.00000015905 -1.25559174474e-07 1.18450477621e-07"/>
+    <parent link="Tproximal"/>
+    <child link="Tmiddle"/>
+    <limit effort="0.5" lower="0.0" upper="1.57079632679" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Ttip">
+    <inertial>
+      <origin xyz="-0.00506285640086 0.000158437874597 -0.00949116013742" rpy="0 0 0"/>
+      <mass value="0.00398141"/>
+      <inertia ixx="2.27393e-07" ixy="-4.487e-12" ixz="-6.19169e-12" iyy="2.50732e-07" iyz="3.7689e-09" izz="1.09262e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506272959909 -7.78884574837e-07 -2.9976296162e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Ttip_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506272959909 -7.78884574837e-07 -2.9976296162e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Ttip__Tmiddle" type="revolute">
+    <origin xyz="0 1.28178098219e-07 -0.0215859563877" rpy="0 0 0"/>
+    <axis xyz="-1.00000015905 -1.25559174474e-07 1.18450477621e-07"/>
+    <parent link="Tmiddle"/>
+    <child link="Ttip"/>
+    <limit effort="0.5" lower="0.0" upper="1.57079632679" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Iproximal">
+    <inertial>
+      <origin xyz="-0.00506269303095 0.000178661194879 -0.0113960183486" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532665437356 -0.00134306865084 -0.0128298343462" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Iproximal_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532665437356 -0.00134306865084 -0.0128298343462" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Iproximal__palm" type="revolute">
+    <origin xyz="-0.0053425 -0.081883 0.00351788" rpy="-1.84942615384 0.155854888307 -0.117563434836"/>
+    <axis xyz="-0.999999806433 -3.11064646163e-07 -1.92575397934e-07"/>
+    <parent link="palm"/>
+    <child link="Iproximal"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Imiddle">
+    <inertial>
+      <origin xyz="-0.00506266070615 0.000178528721729 -0.0113957955067" rpy="0 0 0"/>
+      <mass value="0.0046468"/>
+      <inertia ixx="3.60659e-07" ixy="2.95375e-10" ixz="3.96643e-12" iyy="4.02251e-07" iyz="7.4602e-09" izz="1.59669e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.00532665674393 -0.00134322760034 -0.012829627881" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Imiddle_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00532665674393 -0.00134322760034 -0.012829627881" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/seg_L.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Imiddle__Iproximal" type="revolute">
+    <origin xyz="0 0 -0.0258750517122" rpy="-0.0872662181335 -6.1944905734e-07 4.44119679405e-07"/>
+    <axis xyz="-0.999999806433 9.5344259203e-08 4.3684563622e-07"/>
+    <parent link="Iproximal"/>
+    <child link="Imiddle"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="Itip">
+    <inertial>
+      <origin xyz="-0.00506271582253 0.000159256228073 -0.00949120545948" rpy="0 0 0"/>
+      <mass value="0.00398141"/>
+      <inertia ixx="2.27393e-07" ixy="-4.487e-12" ixz="-6.19169e-12" iyy="2.50732e-07" iyz="3.7689e-09" izz="1.09262e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.00506242530965 1.78928126315e-07 -5.67587439049e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Itip_color">
+        <color rgba="0.74902 0.74902 0.74902 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00506242530965 1.78928126315e-07 -5.67587439049e-07" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://finger_description/meshes/tip.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Itip__Imiddle" type="revolute">
+    <origin xyz="0 0 -0.0258750542774" rpy="-0.0872665348444 1.37808199802e-07 -5.71018688354e-07"/>
+    <axis xyz="-0.999999806433 -4.99927084681e-07 2.56441750668e-07"/>
+    <parent link="Imiddle"/>
+    <child link="Itip"/>
+    <limit effort="0.5" lower="0.0" upper="1.4835298642" velocity="1.0"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <gazebo reference="base">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="forearm">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="palm axis">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="palm">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Rproximal">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Rmiddle">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Rtip">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Mproximal">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Mmiddle">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Mtip">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Pproximal">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Pmiddle">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Ptip">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="thumb base">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Tproximal">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Tmiddle">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Ttip">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Iproximal">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Imiddle">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo reference="Itip">
+    <visual>
+      <material>
+        <ambient>0.74902 0.74902 0.74902 1.0</ambient>
+        <diffuse>0.74902 0.74902 0.74902 1.0</diffuse>
+        <specular>0.74902 0.74902 0.74902 1.0</specular>
+      </material>
+    </visual>
+  </gazebo>
+  <gazebo>
+    <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+  </gazebo>
+  <joint name="base_joint" type="fixed" >
+    <parent link="base_link" />
+    <child link="base" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+</robot>
+

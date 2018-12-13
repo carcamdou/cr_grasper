@@ -64,7 +64,7 @@ t_vel = .3 #target velocity for joints when grasping
 maxForce = 100 #max force allowed
 time_limit = 3.0 #how long given to find a grasp
 #TODO: make this part of config file - joints to move should depend on user
-grip_joints = [3,6,9] #which joints in the hand to use - specified by num in the URDF
+grip_joints = [3,6,9] #which joints in the hand to use - specified by num in the ObjectURDFs
 
 
 """#####################################################################################################################
@@ -82,7 +82,7 @@ def rand_coord():
 
 
 """#####################################################################################################################
-                                           URDF/OBJECT MANAGEMENT
+                                           ObjectURDFs/OBJECT MANAGEMENT
 #####################################################################################################################"""
 
 def reset_hand(handID = None, handPos = [0, 0, -h_dist] , handOr = [0, 0, 0, 1],

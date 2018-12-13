@@ -1,9 +1,0 @@
-# constants
-int32 INIT_HAND = 1
-int32 CLOSE_GRASP = 2
-int32 OPEN_GRASP = 3
-int32 SET_GRASP_1 = 4
-int32 SET_GRASP_2 = 5
-int32 CLOSE_HALF_GRASP = 6
-
-

@@ -21,7 +21,7 @@ __To Use:__
         - __grasp_time_limit__ - how long given to find a grasp
         - __active_grasp_joints__ - which joints in the hand to use - specified given joint number from Pybullet getJointInfo
 * __Run grasper.py__
-    - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle Tuple)
+    - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple
 
 
 

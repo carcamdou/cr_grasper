@@ -5,16 +5,8 @@ ccd2134@columbia.edu
 Robotics Research, Fall 2018
 
 """
-
-# TODO: do the list planner w grasps around the object - then return whether they work
-# load object. get grasps in a circle of angles around the object (from 0 to 360 in a circle)
-# spit back finger joints, position, orientation
-# rotate the hand around the base axis to get new grasps
-# hand distance - detect the object colision between the hand and then then move a slight bit away to find optimal distance to object
-# remember to change everything back to scaling of 1 before you give back numbers that make no sense
-# then load in new objects - work on getting them into the
-# figure out another hand
-# then work on simulated annealing (which is better grasps)
+#TODO: figure out another hand
+#TODO: simulated annealing (which is better grasps)
 #TODO: underactuation????
 
 ########################################################################################################################
@@ -29,9 +21,11 @@ import random
 from transforms3d import euler
 from configparser import ConfigParser
 
+
 """#####################################################################################################################
                                     PYBULLET HOUSEKEEPING + GUI MAINTENANCE 
 #####################################################################################################################"""
+
 
 physicsClient = p.connect(p.GUI)  # or p.DIRECT for non-graphical version
 p.setAdditionalSearchPath(pybullet_data.getDataPath())  # optionally
@@ -43,26 +37,21 @@ p.configureDebugVisualizer(p.COV_ENABLE_SEGMENTATION_MARK_PREVIEW, enable=0)
 # change init camera distance/location to view scene
 p.resetDebugVisualizerCamera(cameraDistance=.5, cameraYaw=135, cameraPitch=-20, cameraTargetPosition=[0.0, 0.0, 0.0])
 
+
+
 """#####################################################################################################################
-                                       GLOBAL VARIABLES - to be put into config file
+                                       GLOBAL VARIABLES  - from config file 
 #####################################################################################################################"""
 
 
 config = ConfigParser()
 config.read('config.ini')
 
-print(config.get('file_paths', 'robot_path'))
-print(config.get('file_paths', 'object_path'))
-print(config.getfloat('grasp_settings', 'init_grasp_distance'))
-print(config.getfloat('grasp_settings', 'grasp_distance_margin'))
-print(config.getfloat('grasp_settings', 'max_grasp_force'))
-print(config.getfloat('grasp_settings', 'target_grasp_velocity'))
-print(config.getfloat('grasp_settings', 'grasp_time_limit'))
-print([int(j.strip()) for j in config.get('grasp_settings', 'active_grasp_joints').split(',')])
-
 # loading
 robot_path = config.get('file_paths', 'robot_path')
 object_path = config.get('file_paths', 'object_path')
+object_scale = config.getfloat('file_paths', 'object_scale')
+#object_path = "lego.urdf"
 
 # finding hand positions
 # how far from the origin should the hand be at the start (just needs to be beyond the length of the object)
@@ -77,8 +66,13 @@ max_grasp_force = config.getfloat('grasp_settings', 'max_grasp_force')
 target_grasp_velocity = config.getfloat('grasp_settings', 'target_grasp_velocity')
 # how long given to find a grasp
 grasp_time_limit = config.getfloat('grasp_settings', 'grasp_time_limit')
-# which joints in the hand to use - specified w/ num in the URDF
+# which joints in the hand to use - specified w/ num in the ObjectURDFs
 active_grasp_joints = [int(j.strip()) for j in config.get('grasp_settings', 'active_grasp_joints').split(',')]
+
+
+#use GUI?
+use_gui = config.getboolean('gui_settings', 'use_gui')
+
 
 """#####################################################################################################################
                                                     UTILIES
@@ -95,32 +89,31 @@ def rand_coord():
 
 
 """#####################################################################################################################
-                                           URDF/OBJECT MANAGEMENT
+                                           ObjectURDFs/OBJECT MANAGEMENT
 #####################################################################################################################"""
 
 
-def reset_hand(handID=None, handPos=[0, 0, -init_grasp_distance], handOr=[0, 0, 0, 1],
-               robotPath=object_path, fixed=True):
+def reset_hand(rID=None, rPos=(0, 0, -init_grasp_distance), rOr=(0, 0, 0, 1), fixed=True):
     """
     loads a new instance of the hand into the scene - this disrupts all current physics, so "resets" the scene
     if you send in the "handID", it will delete the old instance before populating a new one
     TODO: give the hand some sensitivity for grasping - force sensors for fingertips?
     """
-    if handID is not None:
-        p.removeBody(handID)
-    handID = p.loadURDF(robot_path, basePosition=handPos, baseOrientation=handOr, useFixedBase=fixed, globalScaling=1)
-    return handID
+    if rID is not None:
+        p.removeBody(rID)
+    rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr, useFixedBase=fixed, globalScaling=1)
+    return rID
 
 
-def reset_ob(obID=None, obPos=[0, 0, 0], fixed=True):
+def reset_ob(oID=None, oPos=(0, 0, 0), fixed=True):
     """
     if you send in the "obID", it will delete the old instance before populating a new one
     orientation here is ignored because the hand orientation changes, so the object doesnt also have to rotate
     """
-    if obID is not None:
-        p.removeBody(obID)
-    obID = p.loadURDF(object_path, obPos, globalScaling=1.5, useFixedBase=fixed)
-    return obID
+    if oID is not None:
+        p.removeBody(oID)
+    oID = p.loadURDF(object_path, oPos, globalScaling=object_scale, useFixedBase=fixed)
+    return oID
 
 
 """#####################################################################################################################
@@ -128,28 +121,28 @@ def reset_ob(obID=None, obPos=[0, 0, 0], fixed=True):
 #####################################################################################################################"""
 
 
-def hand_dist(cubeID, handID, pos, oren):
+def hand_dist(oID, rID, pos, oren):
     """
     actually does tthe movement to have hand touch object to judge distance
 
     returns position of the hand when it touches the object
     """
     # print("reset hand for non-fixed base")
-    reset_hand(handID, handPos=pos, handOr=oren, fixed=False)
-    relax(handID)  # want fingers splayed to get distance
+    reset_hand(rID, rPos=pos, rOr=oren, fixed=False)
+    relax(rID)  # want fingers splayed to get distance
     neg_pos = [-pos[0], -pos[1], -pos[2]]
     has_contact = 0
     while not has_contact:  # while still distance between hand/object
-        p.applyExternalForce(handID, 1, neg_pos, pos, p.WORLD_FRAME)  # move hand toward object
+        p.applyExternalForce(rID, 1, neg_pos, pos, p.WORLD_FRAME)  # move hand toward object
         p.stepSimulation()
-        contact_points = p.getContactPoints(handID, cubeID)  # get contact between cube and hand
+        contact_points = p.getContactPoints(rID, oID)  # get contact between cube and hand
         has_contact = len(contact_points)  # any contact stops the loop
-    t_pos, t_oren = p.getBasePositionAndOrientation(handID)
-    p.removeBody(handID)  # clean up
+    t_pos, t_oren = p.getBasePositionAndOrientation(rID)
+    p.removeBody(rID)  # clean up
     return t_pos  # only need the position of the object
 
 
-def adjust_point_dist(theta_rad, phi_rad, hID, oID, carts, quat):
+def adjust_point_dist(theta_rad, phi_rad, rID, oID, carts, quat):
     """
     move the hand w/fingers splayed until it touches the object
     should touch in center/palm - this should be the best for an initial grasp
@@ -157,18 +150,19 @@ def adjust_point_dist(theta_rad, phi_rad, hID, oID, carts, quat):
     returns set of position coordinates representing how far from the object the hand should be (touching + a margin)
     """
 
-    touching_pos = hand_dist(oID, hID, carts, quat)
+    touching_pos = hand_dist(oID, rID, carts, quat)
     t_dist = sqrt(touching_pos[0] ** 2 + touching_pos[1] ** 2 + touching_pos[2] ** 2)
-    m_dist = t_dist + grasp_distance_margin  # add a small margin to the contact point to allow for legal grasps
+    # add a small margin to the contact point to allow for legal grasps
+    m_dist = t_dist + grasp_distance_margin
 
     carts = astropy.coordinates.spherical_to_cartesian(m_dist, theta_rad, phi_rad)
-    flip_carts = (
-    -carts[0], -carts[1], -carts[2])  # associated coords have it facing away from the object - move to other side
+    # associated coords have it facing away from the object - move to other side
+    flip_carts = (-carts[0], -carts[1], -carts[2])
 
     return flip_carts
 
 
-def get_given_point(dist, theta_rad, phi_rad, hID, oID):
+def get_given_point(dist, theta_rad, phi_rad, rID, oID):
     """
     get the coords and the quat for the hand based on distance from origin and angles
 
@@ -178,32 +172,26 @@ def get_given_point(dist, theta_rad, phi_rad, hID, oID):
     #Rotate about the current z-axis by ϕ. Then, rotate about the new y-axis by θ
     """
     carts = astropy.coordinates.spherical_to_cartesian(dist, theta_rad, phi_rad)
-    neg_carts = (
-    -carts[0], -carts[1], -carts[2])  # associated coords have it facing away from the object - move to other side
-    quat = euler.euler2quat(phi_rad + pi, pi / 2 - theta_rad, pi, axes='sxyz')  # the pi in the z brings it to face "up"
-
+    # associated coords have it facing away from the object - move to other side
+    neg_carts = (-carts[0], -carts[1], -carts[2])
+    # the pi in the z brings it to face "up"
+    quat = euler.euler2quat(phi_rad + pi, pi / 2 - theta_rad, pi, axes='sxyz')
     # move the hand w/fingers splayed until it touches the object, that is the dist to try for a grip
-    close_carts = adjust_point_dist(theta_rad, phi_rad, hID, oID, neg_carts, quat)
+    close_carts = adjust_point_dist(theta_rad, phi_rad, rID, oID, neg_carts, quat)
 
     return (close_carts, quat)
 
 
-def circle_set(hID, cID, dist=init_grasp_distance, n=20, theta=pi / 4, phi=pi):
+def circle_set(rID, oID, n=20, theta=(pi/4), phi=pi):
     """
     move the hand around the object in a reasonable way
-
     returns an array of (position, orientation) pairs
     """
-
-    print("Giving points")
-    # 2 random #s between -pi/2 and pi/2
-    theta_rad = -theta
     increment = 2 * pi / n
     set = []
     for i in range(0, (n + 1)):
-        print(i)
         # TODO: dist here needs to be programmatic
-        set.append(get_given_point(dist=dist, theta_rad=-theta, phi_rad=(-phi) + increment * i, hID=hID, oID=cID))
+        set.append(get_given_point(dist=init_grasp_distance, theta_rad=-theta, phi_rad=(-phi) + increment * i, rID=rID, oID=oID))
 
     return set
 
@@ -234,7 +222,7 @@ def rand_set(dist=init_grasp_distance, n=10):
     print("Getting set of random points")
     set = []
     for i in range(n):
-        set.append(get_rand_point(init_grasp_distance))
+        set.append(get_rand_point(dist))
 
     return set
 
@@ -272,7 +260,7 @@ def grasp(handId):
 
 def relax(handID):
     """
-    return all joints to neutral/furthest extended, baseed on urdf specification
+    return all joints to neutral/furthest extended, based on urdf specification
     """
     print("relaxing hand")
     joint = 0
@@ -358,16 +346,11 @@ def check_grip(cubeID, handID):
 """#####################################################################################################################
                                         MAIN MAIN MAIN MAIN MAIN MAIN
 #####################################################################################################################"""
-
 print("grasp!")
 handID = reset_hand()
 cubeID = reset_ob()
-# floorID = p.loadURDF("plane.urdf", [0, 0, -2]) #the ground!
 
-
-# hand_set = test_points()
-# hand_set = rand_set()
-hand_set = circle_set(hID=handID, cID=cubeID, n=5)
+hand_set = circle_set(rID=handID, oID=cubeID, n=10)
 print(hand_set)
 
 handID = reset_hand()
