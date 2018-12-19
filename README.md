@@ -23,7 +23,7 @@ __To Use:__
         - __grasp_time_limit__ - how long given to find a grasp
         - __active_grasp_joints__ - which joints in the hand to use - specified given joint number from Pybullet getJointInfo
         - __num_grasps_per_cycle__ - number of grasps attempted in each rotation around object (evenly spaced attempts)
-        - __max_grasp_force__ - number of rotations (with angles spread between pi/2 and 0) 
+        - __num_cycles_to_grasp__ - number of rotations (with angles spread between pi/2 and 0 - ie euler theta) 
 
 * __Run grasper.py__
     - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple
