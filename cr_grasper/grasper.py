@@ -5,9 +5,19 @@ ccd2134@columbia.edu
 Robotics Research, Fall 2018
 
 """
+
+
+#gripper
+#finger hand
+
+#if use GUI in config
+
+
+#TODO: self collision issues - pubullet
 #TODO: figure out another hand
 #TODO: simulated annealing (which is better grasps)
-#TODO: underactuation????
+#TODO: underactuation???? splaying too far back
+
 
 ########################################################################################################################
 
@@ -45,7 +55,7 @@ p.resetDebugVisualizerCamera(cameraDistance=.5, cameraYaw=135, cameraPitch=-20, 
 
 
 config = ConfigParser()
-config.read('config.ini')
+config.read('bh_config.ini')
 
 # loading
 robot_path = config.get('file_paths', 'robot_path')
@@ -56,6 +66,8 @@ object_scale = config.getfloat('file_paths', 'object_scale')
 # finding hand positions
 # how far from the origin should the hand be at the start (just needs to be beyond the length of the object)
 init_grasp_distance = config.getfloat('grasp_settings', 'init_grasp_distance')
+#how hard to push hand toward object to find distance. default to  1
+speed_find_distance = config.getfloat('grasp_settings', 'speed_find_distance')
 # how far from touching do you want the palm to be when attempting grips
 grasp_distance_margin = config.getfloat('grasp_settings', 'grasp_distance_margin')
 
@@ -68,7 +80,8 @@ target_grasp_velocity = config.getfloat('grasp_settings', 'target_grasp_velocity
 grasp_time_limit = config.getfloat('grasp_settings', 'grasp_time_limit')
 # which joints in the hand to use - specified w/ num in the ObjectURDFs
 active_grasp_joints = [int(j.strip()) for j in config.get('grasp_settings', 'active_grasp_joints').split(',')]
-
+num_grasps_per_cycle = config.getint('grasp_settings', 'num_grasps_per_cycle')
+num_cycles_to_grasp = config.getint('grasp_settings', 'num_cycles_to_grasp')
 
 #use GUI?
 use_gui = config.getboolean('gui_settings', 'use_gui')
@@ -102,6 +115,7 @@ def reset_hand(rID=None, rPos=(0, 0, -init_grasp_distance), rOr=(0, 0, 0, 1), fi
     if rID is not None:
         p.removeBody(rID)
     rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr, useFixedBase=fixed, globalScaling=1)
+
     return rID
 
 
@@ -129,8 +143,9 @@ def hand_dist(oID, rID, pos, oren):
     """
     # print("reset hand for non-fixed base")
     reset_hand(rID, rPos=pos, rOr=oren, fixed=False)
+
     relax(rID)  # want fingers splayed to get distance
-    neg_pos = [-pos[0], -pos[1], -pos[2]]
+    neg_pos = [-pos[0] * speed_find_distance, -pos[1] * speed_find_distance, -pos[2] * speed_find_distance]
     has_contact = 0
     while not has_contact:  # while still distance between hand/object
         p.applyExternalForce(rID, 1, neg_pos, pos, p.WORLD_FRAME)  # move hand toward object
@@ -190,8 +205,33 @@ def circle_set(rID, oID, n=20, theta=(pi/4), phi=pi):
     increment = 2 * pi / n
     set = []
     for i in range(0, (n + 1)):
-        # TODO: dist here needs to be programmatic
         set.append(get_given_point(dist=init_grasp_distance, theta_rad=-theta, phi_rad=(-phi) + increment * i, rID=rID, oID=oID))
+
+    return set
+
+
+
+def sphere_set(rID, oID):
+    """
+    move the hand around the object in a reasonable way
+    returns an array of (position, orientation) pairs
+    """
+    phi = pi
+    increment_phi = (2*pi) / num_grasps_per_cycle
+
+    theta = pi/2 #theta btw -pi/2 and pi/2
+    increment_theta = (pi/2)/(num_cycles_to_grasp)
+    print("increment_theta", increment_theta)
+
+    set = []
+    theta = theta + increment_theta
+    for theta_i in range(0, (num_cycles_to_grasp)):
+        theta -= increment_theta
+        print("i: ", theta_i)
+        print("theta: ", theta)
+
+        for phi_i in range(0, (num_grasps_per_cycle + 1)):
+            set.append(get_given_point(dist=init_grasp_distance, theta_rad=-theta, phi_rad=(-phi) + increment_phi * phi_i, rID=rID, oID=oID))
 
     return set
 
@@ -255,7 +295,7 @@ def grasp(handId):
         p.stepSimulation()
         for joint in active_grasp_joints:
             p.setJointMotorControl2(bodyUniqueId=handId, jointIndex=joint, controlMode=p.VELOCITY_CONTROL,
-                                    targetVelocity=max_grasp_force, force=target_grasp_velocity)
+                                    targetVelocity=target_grasp_velocity, force=max_grasp_force)
 
 
 def relax(handID):
@@ -346,11 +386,14 @@ def check_grip(cubeID, handID):
 """#####################################################################################################################
                                         MAIN MAIN MAIN MAIN MAIN MAIN
 #####################################################################################################################"""
+
+
 print("grasp!")
 handID = reset_hand()
 cubeID = reset_ob()
 
-hand_set = circle_set(rID=handID, oID=cubeID, n=10)
+print("Sphere Set")
+hand_set = sphere_set(rID=handID, oID=cubeID)
 print(hand_set)
 
 handID = reset_hand()
@@ -377,43 +420,3 @@ print("Grips:")
 for grip in good_grips:
     print(grip)
 
-"""#####################################################################################################################
-                                       USEFUL INFORMATION, MAYBE 
-########################################################################################################################
-
-
-Num joints:  11
-joint # 3
-(3, b'bh_j32_joint', 0, 7, 6, 1, 100.0, 1.0, 0.0, 2.44, 30.0, 2.0, b'bh_finger_32_link', (0.0, 0.0, -1.0), (-0.0040000006556510925, 0.0, 0.033900000154972076), (-0.7071080610451548, 3.121199146877591e-17, -3.12121044560798e-17, 0.7071055013256238), 2)
-joint # 6
-(6, b'bh_j12_joint', 0, 10, 9, 1, 100.0, 1.0, 0.0, 2.44, 30.0, 2.0, b'bh_finger_12_link', (0.0, 0.0, -1.0), (-0.0040000006556510925, 0.0, 0.033900000154972076), (-0.7071080610451548, 0.0, 0.0, 0.7071055013256238), 5)
-joint # 9
-(9, b'bh_j22_joint', 0, 13, 12, 1, 100.0, 1.0, 0.0, 2.44, 30.0, 2.0, b'bh_finger_22_link', (0.0, 0.0, -1.0), (-0.0040000006556510925, 0.0, 0.033900000154972076), (-0.7071080610451548, 3.121199146877591e-17, -3.12121044560798e-17, 0.7071055013256238), 8)
-
-
-joint lower limit: 0.0
-joint upper limit: 2.44
-
-(0, b'hand_joint', 4, -1, -1, 0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, b'hand_base_link', (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0), -1)
-(1, b'bh_base_joint', 4, -1, -1, 0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, b'bh_base_link', (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 1.0), 0)
-(2, b'bh_j31_joint', 4, -1, -1, 0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, b'bh_finger_31_link', (0.0, 0.0, 0.0), (0.0, 0.0, 0.05040000006556511), (0.0, 0.0, 0.7071067966408574, 0.7071067657322373), 1)
-(3, b'bh_j32_joint', 0, 7, 6, 1, 100.0, 1.0, 0.0, 2.44, 30.0, 2.0, b'bh_finger_32_link', (0.0, 0.0, -1.0), (-0.008000001311302185, 0.0, 0.06780000030994415), (-0.7071080610451548, 3.121199146877591e-17, -3.12121044560798e-17, 0.7071055013256238), 2)
-(4, b'bh_j33_joint', 0, 8, 7, 1, 100.0, 1.0, 0.0, 0.84, 30.0, 2.0, b'bh_finger_33_link', (0.0, 0.0, -1.0), (-0.1398719996213913, 0.006000000052154064, 0.0), (0.0, 0.0, 0.0, 1.0), 3)
-(5, b'bh_j11_joint', 0, 9, 8, 1, 100.0, 1.0, 0.0, 3.1416, 30.0, 2.0, b'bh_finger_11_link', (0.0, 0.0, -1.0), (-0.05000000074505806, 0.0, 0.05040000006556511), (0.0, 0.0, -0.7071080610451548, 0.7071055013256238), 1)
-(6, b'bh_j12_joint', 0, 10, 9, 1, 100.0, 1.0, 0.0, 2.44, 30.0, 2.0, b'bh_finger_12_link', (0.0, 0.0, -1.0), (-0.008000001311302185, 0.0, 0.06780000030994415), (-0.7071080610451548, 0.0, 0.0, 0.7071055013256238), 5)
-(7, b'bh_j13_joint', 0, 11, 10, 1, 100.0, 1.0, 0.0, 0.84, 30.0, 2.0, b'bh_finger_13_link', (0.0, 0.0, -1.0), (-0.1398719996213913, 0.006000000052154064, 0.0), (0.0, 0.0, 0.0, 1.0), 6)
-(8, b'bh_j21_joint', 0, 12, 11, 1, 100.0, 1.0, 0.0, 3.1416, 30.0, 2.0, b'bh_finger_21_link', (0.0, 0.0, 1.0), (0.05000000074505806, 0.0, 0.05040000006556511), (0.0, 0.0, -0.7071080610451548, 0.7071055013256238), 1)
-(9, b'bh_j22_joint', 0, 13, 12, 1, 100.0, 1.0, 0.0, 2.44, 30.0, 2.0, b'bh_finger_22_link', (0.0, 0.0, -1.0), (-0.008000001311302185, 0.0, 0.06780000030994415), (-0.7071080610451548, 3.121199146877591e-17, -3.12121044560798e-17, 0.7071055013256238), 8)
-(10, b'bh_j23_joint', 0, 14, 13, 1, 100.0, 1.0, 0.0, 0.84, 30.0, 2.0, b'bh_finger_23_link', (0.0, 0.0, -1.0), (-0.1398719996213913, 0.006000000052154064, 0.0), (0.0, 0.0, 0.0, 1.0), 9)
-
-
-points = points_on_circumference(center=(0, 0), r=.15, n=5)
-
-
-for each in points:
-    p.resetBasePositionAndOrientation(handID, [each[0], each[1], 0], [0, 0, 0, 1])
-
-planeId = p.loadURDF("plane.urdf", [0, 0, -0.5]) #the ground!
-
-
-"""
