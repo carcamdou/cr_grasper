@@ -30,6 +30,7 @@ __To Use:__
 
 
 
+All the files in the ObjectURDFs folder are from the PyBullet examples folder. Here [on GitHub](https://github.com/bulletphysics/bullet3/tree/master/data).
 
 
 ##### Notes on URDFs: (based on needs for  barrett hand)

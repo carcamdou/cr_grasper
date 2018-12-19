@@ -30,7 +30,8 @@ import astropy.coordinates
 import random
 from transforms3d import euler
 from configparser import ConfigParser
-
+from pyquaternion import Quaternion
+import numpy as np
 
 """#####################################################################################################################
                                     PYBULLET HOUSEKEEPING + GUI MAINTENANCE 
@@ -82,6 +83,8 @@ grasp_time_limit = config.getfloat('grasp_settings', 'grasp_time_limit')
 active_grasp_joints = [int(j.strip()) for j in config.get('grasp_settings', 'active_grasp_joints').split(',')]
 num_grasps_per_cycle = config.getint('grasp_settings', 'num_grasps_per_cycle')
 num_cycles_to_grasp = config.getint('grasp_settings', 'num_cycles_to_grasp')
+#num_wrist_rotations = config.getint('grasp_settings', 'num_wrist_rotations')
+#use_wrist_rotations = config.getboolean('grasp_settings', 'use_wrist_rotations')
 
 #use GUI?
 use_gui = config.getboolean('gui_settings', 'use_gui')
@@ -194,6 +197,14 @@ def get_given_point(dist, theta_rad, phi_rad, rID, oID):
     # move the hand w/fingers splayed until it touches the object, that is the dist to try for a grip
     close_carts = adjust_point_dist(theta_rad, phi_rad, rID, oID, neg_carts, quat)
 
+    """
+    quat_rot = []
+    rot = pi/num_wrist_rotations
+    for i in range(0,num_wrist_rotations):
+        q_rot = [quat[0], quat[1], (-pi/2 + (rot*i)), quat[3]]
+        quat_rot.append((close_carts, q_rot))
+    return quat_rot
+    """
     return (close_carts, quat)
 
 
@@ -231,7 +242,9 @@ def sphere_set(rID, oID):
         print("theta: ", theta)
 
         for phi_i in range(0, (num_grasps_per_cycle + 1)):
-            set.append(get_given_point(dist=init_grasp_distance, theta_rad=-theta, phi_rad=(-phi) + increment_phi * phi_i, rID=rID, oID=oID))
+            point = get_given_point(dist=init_grasp_distance, theta_rad=-theta, phi_rad=(-phi) + increment_phi * phi_i, rID=rID,
+                            oID=oID)
+            set.append(point)
 
     return set
 
@@ -402,18 +415,16 @@ cubeID = reset_ob(cubeID, [0, 0, 0])
 good_grips = []
 
 pos = 0
-for each in hand_set:
+for pose in hand_set:
     print("position #: ", pos)
-
-    sleep(.2)
     relax(handID)
-    p.resetBasePositionAndOrientation(handID, each[0], each[1])
+    p.resetBasePositionAndOrientation(handID, pose[0], pose[1])
     cubeID = reset_ob(cubeID, [0, 0, 0], fixed=False)
     grasp(handID)
-    sleep(.01)
     good_grips.append(check_grip(cubeID, handID))
     p.removeAllUserDebugItems()
     pos += 1
+
 
 print("Num Good Grips: ", len(good_grips))
 print("Grips:")
