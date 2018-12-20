@@ -106,10 +106,10 @@ def rand_coord():
     rand_phi = random.uniform(-pi / 2, pi / 2)
     return rand_theta, rand_phi
 
-def add_debug_lines(rID):
-        p.addUserDebugLine([0, 0, 0], [.75, 0, 0], [1, 0, 0], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
-        p.addUserDebugLine([0, 0, 0], [0, .75, 0], [0, 1, 0], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
-        p.addUserDebugLine([0, 0, 0], [0, 0, .75], [0, 0, 1], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
+def add_debug_lines(rID, line_dist = .3):
+        p.addUserDebugLine([0, 0, 0], [line_dist, 0, 0], [1, 0, 0], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
+        p.addUserDebugLine([0, 0, 0], [0, line_dist, 0], [0, 1, 0], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
+        p.addUserDebugLine([0, 0, 0], [0, 0, line_dist], [0, 0, 1], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
 
 """#####################################################################################################################
                                            ObjectURDFs/OBJECT MANAGEMENT
@@ -253,9 +253,11 @@ def sphere_set(rID, oID):
         print("theta: ", theta)
 
         for phi_i in range(0, (num_grasps_per_cycle + 1)):
+            p.removeAllUserDebugItems()
             point = get_given_point(dist=init_grasp_distance, theta_rad=-theta, phi_rad=(-phi) + increment_phi * phi_i, rID=rID,
                             oID=oID)
             set.append(point)
+
 
     return set
 
@@ -500,13 +502,13 @@ for pose in hand_set:
     for pose in poses:
         print("position #: ", pos)
         relax(handID)
+        p.removeAllUserDebugItems()
         p.resetBasePositionAndOrientation(handID, pose[0], pose[1])
         if debug_lines:
             add_debug_lines(handID)
         cubeID = reset_ob(cubeID, [0, 0, 0], fixed=False)
         grasp(handID)
         good_grips.append(check_grip(cubeID, handID))
-        p.removeAllUserDebugItems()
         pos += 1
 
     """
