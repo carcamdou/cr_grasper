@@ -6,7 +6,7 @@ from math import sqrt
 from numpy import cross, diagonal
 from numpy.linalg import norm
 import numpy as np
-from scipy.spatial import ConvexHull
+from scipy.spatial import ConvexHull, distance
 
 
 #physicsClient = p.connect(p.DIRECT)  #p.DIRECT for non-graphical version
@@ -105,16 +105,34 @@ def gws(rID, oID):
 
 #VOLUME QUALITY
 
-"""
-take the qhull of the 6 dim vectors [fx, fy, fz, tx, ty, tz] created by gws
-the volume of this qhull is the metric 
-"""
 
 def volume(force_torque):
+    """
+    get qhull of the 6 dim vectors [fx, fy, fz, tx, ty, tz] created by gws (from contact points)
+    get the volume
+    """
     convex_hull = ConvexHull(points = force_torque)
     return convex_hull
 
 
+def eplison(force_torque):
+    """
+    get qhull of the 6 dim vectors [fx, fy, fz, tx, ty, tz] created by gws (from contact points)
+    get the distance from centroid of the hull to the closest vertex
+    """
+    hull = ConvexHull(points=force_torque)
+    centroid = []
+    for dim in range(0,6):
+        centroid.append(np.mean(hull.points[hull.vertices, dim]))
+    shortest_distance = 500000000
+    closest_point = None
+    for point in force_torque:
+        point_dist = distance.euclidean(centroid, point)
+        if point_dist < shortest_distance:
+            shortest_distance = point_dist
+            closest_point = point
+
+    return shortest_distance
 
 
 

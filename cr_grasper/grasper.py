@@ -310,8 +310,10 @@ def wrist_rotations(pose):
     quat_y = quat[1]
     quat_z = quat[2]
     current_quat = Quaternion(quat_w, quat_x, quat_y, quat_z)
-    iter = pi/num_wrist_rotations
-    for i in range(0, num_wrist_rotations):
+    #iter = pi/num_wrist_rotations
+    #for i in range(0, num_wrist_rotations):
+    iter = pi/5
+    for i in range(0, 3):
         rot_quat = Quaternion(axis=(np.array((-point[0], -point[1], -point[2]))), radians= ((pi/2)+(iter * i)))
         delta_quat = rot_quat * current_quat
         pyb_quat = (delta_quat[1], delta_quat[2], delta_quat[3], delta_quat[0])
@@ -421,6 +423,8 @@ def check_grip(cubeID, handID):
         p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
         sleep(.3)
         return None
+
+#TODO: return start + end position + quaternion to get a metric for how much the object moved in the grasp
 
 
 # TODO: other grasp measurement metrics - simulated annealing, etc
