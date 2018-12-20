@@ -33,6 +33,7 @@ from configparser import ConfigParser
 from pyquaternion import Quaternion
 import numpy as np
 
+
 """#####################################################################################################################
                                     PYBULLET HOUSEKEEPING + GUI MAINTENANCE 
 #####################################################################################################################"""
@@ -83,11 +84,13 @@ grasp_time_limit = config.getfloat('grasp_settings', 'grasp_time_limit')
 active_grasp_joints = [int(j.strip()) for j in config.get('grasp_settings', 'active_grasp_joints').split(',')]
 num_grasps_per_cycle = config.getint('grasp_settings', 'num_grasps_per_cycle')
 num_cycles_to_grasp = config.getint('grasp_settings', 'num_cycles_to_grasp')
-#num_wrist_rotations = config.getint('grasp_settings', 'num_wrist_rotations')
-#use_wrist_rotations = config.getboolean('grasp_settings', 'use_wrist_rotations')
+num_wrist_rotations = config.getint('grasp_settings', 'num_wrist_rotations')
+use_wrist_rotations = config.getboolean('grasp_settings', 'use_wrist_rotations')
 
 #use GUI?
 use_gui = config.getboolean('gui_settings', 'use_gui')
+#debug lines
+debug_lines = config.getboolean('gui_settings', 'debug_lines')
 
 
 """#####################################################################################################################
@@ -103,6 +106,10 @@ def rand_coord():
     rand_phi = random.uniform(-pi / 2, pi / 2)
     return rand_theta, rand_phi
 
+def add_debug_lines(rID):
+        p.addUserDebugLine([0, 0, 0], [.75, 0, 0], [1, 0, 0], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
+        p.addUserDebugLine([0, 0, 0], [0, .75, 0], [0, 1, 0], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
+        p.addUserDebugLine([0, 0, 0], [0, 0, .75], [0, 0, 1], parentObjectUniqueId=rID, parentLinkIndex=-1, lineWidth=500)
 
 """#####################################################################################################################
                                            ObjectURDFs/OBJECT MANAGEMENT
@@ -119,6 +126,8 @@ def reset_hand(rID=None, rPos=(0, 0, -init_grasp_distance), rOr=(0, 0, 0, 1), fi
         p.removeBody(rID)
     rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr, useFixedBase=fixed, globalScaling=1)
 
+    if debug_lines:
+        add_debug_lines(rID)
     return rID
 
 
@@ -290,6 +299,27 @@ def test_points(dist=init_grasp_distance):
     return test
 
 
+
+def wrist_rotations(pose):
+    rotated_poses = []
+    point = pose[0]
+    quat = pose[1]
+    # change to from xyzw to wxyz
+    quat_w = quat[3]
+    quat_x = quat[0]
+    quat_y = quat[1]
+    quat_z = quat[2]
+    current_quat = Quaternion(quat_w, quat_x, quat_y, quat_z)
+    iter = pi/num_wrist_rotations
+    for i in range(0, num_wrist_rotations):
+        rot_quat = Quaternion(axis=(np.array((-point[0], -point[1], -point[2]))), radians= ((pi/2)+(iter * i)))
+        delta_quat = rot_quat * current_quat
+        pyb_quat = (delta_quat[1], delta_quat[2], delta_quat[3], delta_quat[0])
+        rotated_poses.append((point, pyb_quat))
+    return rotated_poses
+
+
+
 """#####################################################################################################################
                                             GRIPPER FUNCTIONS/MOVEMENT
 #####################################################################################################################"""
@@ -311,15 +341,15 @@ def grasp(handId):
                                     targetVelocity=target_grasp_velocity, force=max_grasp_force)
 
 
-def relax(handID):
+def relax(rID):
     """
     return all joints to neutral/furthest extended, based on urdf specification
     """
     print("relaxing hand")
     joint = 0
-    num = p.getNumJoints(handID)
+    num = p.getNumJoints(rID)
     while joint < num:
-        p.resetJointState(bodyUniqueId=handID, jointIndex=joint, targetValue=0.0)
+        p.resetJointState(rID, jointIndex=joint, targetValue=0.0)
         joint = joint + 1
 
 
@@ -399,6 +429,45 @@ def check_grip(cubeID, handID):
 """#####################################################################################################################
                                         MAIN MAIN MAIN MAIN MAIN MAIN
 #####################################################################################################################"""
+def check_grip(cubeID, handID):
+    # TODO: make direction of motion consistant (up and away from origin?)
+    # TODO: modify to take in hand and cube position/orientation + load into environment w/gravity before shaking
+    """
+    check grip by adding in gravity
+    """
+    print("checking strength of current grip")
+    mag = 1
+    pos, oren = p.getBasePositionAndOrientation(handID)
+    # pos, oren = p.getBasePositionAndOrientation(cubeID)
+    time_limit = .5
+    finish_time = time() + time_limit
+    p.addUserDebugText("Grav Check!", [-.07, .07, .07], textColorRGB=[0, 0, 1], textSize=1)
+    while time() < finish_time:
+        p.stepSimulation()
+        # add in "gravity"
+        p.applyExternalForce(cubeID, linkIndex=-1, forceObj=[0, 0, -mag], posObj=pos, flags=p.WORLD_FRAME)
+    contact = p.getContactPoints(cubeID, handID)  # see if hand is still holding obj after gravity is applied
+    print("contacts", contact)
+    if len(contact) > 0:
+        p.removeAllUserDebugItems()
+        p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
+        sleep(.3)
+        print("Good Grip to Add")
+        return get_robot_config(handID)
+
+    else:
+        p.removeAllUserDebugItems()
+        p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
+        sleep(.3)
+        return None
+
+
+# TODO: other grasp measurement metrics - simulated annealing, etc
+
+
+"""#####################################################################################################################
+                                        MAIN MAIN MAIN MAIN MAIN MAIN
+#####################################################################################################################"""
 
 
 print("grasp!")
@@ -416,15 +485,47 @@ good_grips = []
 
 pos = 0
 for pose in hand_set:
-    print("position #: ", pos)
-    relax(handID)
-    p.resetBasePositionAndOrientation(handID, pose[0], pose[1])
-    cubeID = reset_ob(cubeID, [0, 0, 0], fixed=False)
-    grasp(handID)
-    good_grips.append(check_grip(cubeID, handID))
-    p.removeAllUserDebugItems()
-    pos += 1
+    poses = []
+    poses.append(pose)
+    if use_wrist_rotations:
+        rotated_poses = wrist_rotations(pose)
+        poses = poses + rotated_poses
 
+    for pose in poses:
+        print("position #: ", pos)
+        relax(handID)
+        p.resetBasePositionAndOrientation(handID, pose[0], pose[1])
+        if debug_lines:
+            add_debug_lines(handID)
+        cubeID = reset_ob(cubeID, [0, 0, 0], fixed=False)
+        grasp(handID)
+        good_grips.append(check_grip(cubeID, handID))
+        p.removeAllUserDebugItems()
+        pos += 1
+
+    """
+    iter = pi / 2
+    for i in range(0, 2):
+        point = pose[0]
+        quat = pose[1]
+        quat_w = quat[3]
+        quat_x = quat[0]
+        quat_y = quat[1]
+        quat_z = quat[2]
+        current_quat = Quaternion(quat_w, quat_x, quat_y, quat_z)
+        # rot_quat = Quaternion(axis=(np.array(pos)), radians= random.uniform(-pi/2, pi/2))
+        rot_quat = Quaternion(axis=(np.array((-point[0], -point[1], -point[2]))), radians=pi / 2 + (iter * i))
+        #delta_quat = current_quat + rot_quat
+        delta_quat = rot_quat * current_quat
+        pyb_quat = (delta_quat[1], delta_quat[2], delta_quat[3], delta_quat[0])
+        print("new quat: ", pyb_quat)
+        relax(handID)
+        p.resetBasePositionAndOrientation(handID, pose[0], pyb_quat)
+        if debug_lines:
+            add_debug_lines(handID)
+        sleep(1)
+        grasp(handID)
+    """
 
 print("Num Good Grips: ", len(good_grips))
 print("Grips:")
