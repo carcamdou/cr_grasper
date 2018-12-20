@@ -147,6 +147,8 @@ def reset_ob(oID=None, oPos=(0, 0, 0), fixed=True):
 #####################################################################################################################"""
 
 
+#TODO: make these more user specifiable (range of angles w reasonable defaults)
+
 def hand_dist(oID, rID, pos, oren):
     """
     actually does tthe movement to have hand touch object to judge distance
