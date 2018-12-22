@@ -39,6 +39,7 @@ from transforms3d import euler
 from configparser import ConfigParser
 from pyquaternion import Quaternion
 import numpy as np
+from scipy.spatial import distance
 
 
 
@@ -78,6 +79,7 @@ use_wrist_rotations = config.getboolean('grasp_settings', 'use_wrist_rotations')
 
 use_gui = config.getboolean('gui_settings', 'use_gui')
 debug_lines = config.getboolean('gui_settings', 'debug_lines')
+debug_text = config.getboolean('gui_settings', 'debug_text')
 
 
 # UTILIES
@@ -115,6 +117,10 @@ def reset_ob(oID=None, oPos=(0, 0, 0), fixed=True):
 
     return oID
 
+def clean_up(rID):
+    p.removeBody(rID)
+    p.removeAllUserDebugItems()
+
 
 """#####################################################################################################################
                                             HAND ORIENTATION + LOCATION
@@ -131,18 +137,16 @@ def hand_dist(oID, rID, pos, oren):
     """
     # print("reset hand for non-fixed base")
     reset_hand(rID, rPos=pos, rOr=oren, fixed=False)
-
     relax(rID)  # want fingers splayed to get distance
-    neg_pos = [-pos[0] * speed_find_distance, -pos[1] * speed_find_distance, -pos[2] * speed_find_distance]
+    force_vector = np.array(pos)*-speed_find_distance
+
     has_contact = 0
     while not has_contact:  # while still distance between hand/object
-        p.applyExternalForce(rID, 1, neg_pos, pos, p.WORLD_FRAME)  # move hand toward object
+        p.applyExternalForce(rID, -1, force_vector, pos, p.WORLD_FRAME)
         p.stepSimulation()
-        contact_points = p.getContactPoints(rID, oID)  # get contact between cube and hand
-        has_contact = len(contact_points)  # any contact stops the loop
+        has_contact = len(p.getContactPoints(rID, oID))
     t_pos, t_oren = p.getBasePositionAndOrientation(rID)
-    p.removeBody(rID)  # clean up
-    p.removeAllUserDebugItems()
+    clean_up(rID)
     return t_pos  # only need the position of the object
 
 
@@ -154,14 +158,13 @@ def adjust_point_dist(theta_rad, phi_rad, rID, oID, carts, quat):
     returns set of position coordinates representing how far from the object the hand should be (touching + a margin)
     """
 
-    touching_pos = hand_dist(oID, rID, carts, quat)
-    t_dist = sqrt(touching_pos[0] ** 2 + touching_pos[1] ** 2 + touching_pos[2] ** 2)
-    # add a small margin to the contact point to allow for legal grasps
+    t_pos = hand_dist(oID, rID, carts, quat)
+    t_dist = distance.euclidean(t_pos, [0,0,0])
     m_dist = t_dist + grasp_distance_margin
 
     carts = astropy.coordinates.spherical_to_cartesian(m_dist, theta_rad, phi_rad)
     # associated coords have it facing away from the object - move to other side
-    flip_carts = (-carts[0], -carts[1], -carts[2])
+    flip_carts = np.array(carts)*-1
 
     return flip_carts
 
@@ -177,7 +180,7 @@ def get_given_point(dist, theta_rad, phi_rad, rID, oID):
     """
     carts = astropy.coordinates.spherical_to_cartesian(dist, theta_rad, phi_rad)
     # associated coords have it facing away from the object - move to other side
-    neg_carts = (-carts[0], -carts[1], -carts[2])
+    neg_carts = np.array(carts)*-1
     # the pi in the z brings it to face "up"
     quat = euler.euler2quat(phi_rad + pi, pi / 2 - theta_rad, pi, axes='sxyz')
     # move the hand w/fingers splayed until it touches the object, that is the dist to try for a grip
@@ -187,7 +190,7 @@ def get_given_point(dist, theta_rad, phi_rad, rID, oID):
 
 
 
-def sphere_set(rID, oID, phi_init = pi, phi_span = 2*pi, theta_init = pi/2, theta_span = pi):
+def sphere_set(rID, oID, phi_init = pi, phi_span = 2*pi, theta_init = pi/2, theta_span = pi/2):
     """
     move the hand around the object in a reasonable way
     returns an array of (position, orientation) pairs
@@ -235,11 +238,9 @@ def wrist_rotations(pose):
     quat_y = quat[1]
     quat_z = quat[2]
     current_quat = Quaternion(quat_w, quat_x, quat_y, quat_z)
-    #iter = pi/num_wrist_rotations
-    #for i in range(0, num_wrist_rotations):
-    iter = pi/5
-    for i in range(0, 3):
-        rot_quat = Quaternion(axis=(np.array((-point[0], -point[1], -point[2]))), radians= ((pi/2)+(iter * i)))
+    rot_iter = (2*pi)/num_wrist_rotations
+    for i in range(0, num_wrist_rotations):
+        rot_quat = Quaternion(axis=np.array(point)*-1, radians=(pi/2)+(rot_iter * i))
         delta_quat = rot_quat * current_quat
         pyb_quat = (delta_quat[1], delta_quat[2], delta_quat[3], delta_quat[0])
         rotated_poses.append((point, pyb_quat))
@@ -357,7 +358,8 @@ def check_grip(cubeID, handID):
     # pos, oren = p.getBasePositionAndOrientation(cubeID)
     time_limit = .5
     finish_time = time() + time_limit
-    p.addUserDebugText("Grav Check!", [-.07, .07, .07], textColorRGB=[0, 0, 1], textSize=1)
+    if debug_text:
+        p.addUserDebugText("Grav Check!", [-.07, .07, .07], textColorRGB=[0, 0, 1], textSize=1)
     while time() < finish_time:
         p.stepSimulation()
         # add in "gravity"
@@ -366,14 +368,16 @@ def check_grip(cubeID, handID):
     print("contacts", contact)
     if len(contact) > 0:
         p.removeAllUserDebugItems()
-        p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
+        if debug_text:
+            p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
         sleep(.3)
         print("Good Grip to Add")
         return get_robot_config(handID)
 
     else:
         p.removeAllUserDebugItems()
-        p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
+        if debug_text:
+            p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
         sleep(.3)
         return None
 

@@ -23,6 +23,7 @@ config.set('grasp_settings', 'num_wrist_rotations', '2')
 config.add_section('gui_settings')
 config.set('gui_settings', 'use_gui', '1')
 config.set('gui_settings', 'debug_lines', '1')
+config.set('gui_settings', 'debug_text', '1')
 
 
 
