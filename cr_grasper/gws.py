@@ -76,6 +76,7 @@ def get_obj_info(oID):
     max_radius = diagonal/2
     return local_frame_pos, max_radius
 
+
 def gws(rID, oID):
     print("eval gws")
     local_frame_pos, max_radius = get_obj_info(oID)
