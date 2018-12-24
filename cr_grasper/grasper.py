@@ -101,8 +101,8 @@ def reset_hand(rID=None, rPos=(0, 0, -init_grasp_distance), rOr=(0, 0, 0, 1), fi
     if rID is not None:
         p.removeBody(rID)
 
-    rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr, useFixedBase=fixed, globalScaling=1)
-
+    rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr,
+                     useFixedBase=fixed, globalScaling=1)
     if debug_lines:
         add_debug_lines(rID)
 
@@ -161,30 +161,21 @@ def adjust_point_dist(theta_rad, phi_rad, rID, oID, carts, quat):
     t_pos = hand_dist(oID, rID, carts, quat)
     t_dist = distance.euclidean(t_pos, [0,0,0])
     m_dist = t_dist + grasp_distance_margin
-
     carts = astropy.coordinates.spherical_to_cartesian(m_dist, theta_rad, phi_rad)
-    # associated coords have it facing away from the object - move to other side
-    flip_carts = np.array(carts)*-1
+    flip_carts = np.array(carts)*-1 #adjust to face obj
 
     return flip_carts
 
 
 def get_given_point(dist, theta_rad, phi_rad, rID, oID):
     """
-    get the coords and the quat for the hand based on distance from origin and angles
-
-    returns a single (position, orientation) pair
-
     For the transform3d euler to quat: (seems like their z is our x, their y is our y, their x is our z)
     Rotate about the current z-axis by ϕ. Then, rotate about the new y-axis by θ
     """
     carts = astropy.coordinates.spherical_to_cartesian(dist, theta_rad, phi_rad)
-    # associated coords have it facing away from the object - move to other side
-    neg_carts = np.array(carts)*-1
-    # the pi in the z brings it to face "up"
-    quat = euler.euler2quat(phi_rad + pi, pi / 2 - theta_rad, pi, axes='sxyz')
-    # move the hand w/fingers splayed until it touches the object, that is the dist to try for a grip
-    close_carts = adjust_point_dist(theta_rad, phi_rad, rID, oID, neg_carts, quat)
+    flip_carts = np.array(carts)*-1 #adjust to face obj
+    quat = euler.euler2quat(phi_rad + pi, pi / 2 - theta_rad, pi, axes='sxyz') #pi in the z to face "up"
+    close_carts = adjust_point_dist(theta_rad, phi_rad, rID, oID, flip_carts, quat) #find dist to grasp
 
     return (close_carts, quat)
 
@@ -285,21 +276,26 @@ def relax(rID):
 
 class Grasp:
 
-    def __init__(self, position, orientation, joints):
-        self.position = position
-        self.orientation = orientation
-        self.joints = joints
+    def __init__(self, robot_position, robot_orientation, robot_joints,
+                 init_object_position, init_object_orientation,
+                 final_object_position, final_object_orientation):
+        self.robot_pose = (robot_position, robot_orientation)
+        self.robot_joints = robot_joints
+        self.init_object_pose = (init_object_position, init_object_orientation)
+        self.final_object_pose = (final_object_position, final_object_orientation)
 
     def __repr__(self):
-        return "Position: " + str(self.position) + " , Orientation: " + str(self.orientation) + " , Joints: " + str(
-            self.joints) + " "
+        return "ROBOT: Position: " + str(self.position) + \
+               " , Orientation: " + str(self.orientation) + \
+               " , Joints: " + str(self.joints) + " "
 
     def __str__(self):
-        return "Position: " + str(self.position) + " , Orientation: " + str(self.orientation) + " , Joints: " + str(
-            self.joints) + " "
+        return "Position: " + str(self.position) + \
+               " , Orientation: " + str(self.orientation) + \
+               " , Joints: " + str(self.joints) + " "
 
 
-def get_robot_config(handID):
+def get_robot_config(handID, objectID):
     pos, oren = p.getBasePositionAndOrientation(handID)
     joints = {}
     num = p.getNumJoints(handID)
@@ -320,27 +316,22 @@ def check_grip(cubeID, handID):
     print("checking strength of current grip")
     mag = 1
     pos, oren = p.getBasePositionAndOrientation(handID)
-    # pos, oren = p.getBasePositionAndOrientation(cubeID)
     time_limit = .5
     finish_time = time() + time_limit
     p.addUserDebugText("Grav Check!", [-.07, .07, .07], textColorRGB=[0, 0, 1], textSize=1)
     while time() < finish_time:
         p.stepSimulation()
-        # add in "gravity"
         p.applyExternalForce(cubeID, linkIndex=-1, forceObj=[0, 0, -mag], posObj=pos, flags=p.WORLD_FRAME)
     contact = p.getContactPoints(cubeID, handID)  # see if hand is still holding obj after gravity is applied
-    print("contacts", contact)
     if len(contact) > 0:
         p.removeAllUserDebugItems()
         p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
-        sleep(.3)
-        print("Good Grip to Add")
+        sleep(.2)
         return get_robot_config(handID)
-
     else:
         p.removeAllUserDebugItems()
         p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
-        sleep(.3)
+        sleep(.2)
         return None
 
 
@@ -371,7 +362,6 @@ def check_grip(cubeID, handID):
         if debug_text:
             p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
         sleep(.3)
-        print("Good Grip to Add")
         return get_robot_config(handID)
 
     else:
