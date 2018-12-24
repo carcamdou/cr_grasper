@@ -59,19 +59,18 @@ def relax(handID):
 
 
 
-def get_obj_info(oID):
+def get_obj_info(oID): #TODO: what about not mesh objects?
     obj_data = p.getCollisionShapeData(oID, -1)[0]
     geometry_type = obj_data[2]
-    print("geometry type: " + str(geometry_type))
+    #print("geometry type: " + str(geometry_type))
     dimensions = obj_data[3]
-    print("dimensions: "+ str(dimensions))
+    #print("dimensions: "+ str(dimensions))
     local_frame_pos = obj_data[5]
-    print("local frome position: " + str(local_frame_pos))
+    #print("local frome position: " + str(local_frame_pos))
     local_frame_orn = obj_data[6]
-    print("local frame oren: " + str(local_frame_orn))
-    # TODO: what about not mesh objects?
+    #print("local frame oren: " + str(local_frame_orn))
     diagonal = sqrt(dimensions[0]**2+dimensions[1]**2+dimensions[2]**2)
-    print("diagonal: ", diagonal)
+    #print("diagonal: ", diagonal)
     max_radius = diagonal/2
     return local_frame_pos, max_radius
 
@@ -143,10 +142,6 @@ def gws_pyramid_extension(rID, oID, pyramid_sides = 6, pyramid_radius = .01):
                 force_torque.append(np.concatenate([pyramid_vector, torque_vector]))
 
     return force_torque
-
-
-
-#VOLUME QUALITY
 
 
 def volume(force_torque):

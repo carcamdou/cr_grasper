@@ -39,7 +39,7 @@ from transforms3d import euler
 from configparser import ConfigParser
 from pyquaternion import Quaternion
 import numpy as np
-from scipy.spatial import distance
+from scipy.spatial import ConvexHull, distance
 
 
 
@@ -76,6 +76,9 @@ num_grasps_per_cycle = config.getint('grasp_settings', 'num_grasps_per_cycle')
 num_cycles_to_grasp = config.getint('grasp_settings', 'num_cycles_to_grasp')
 num_wrist_rotations = config.getint('grasp_settings', 'num_wrist_rotations')
 use_wrist_rotations = config.getboolean('grasp_settings', 'use_wrist_rotations')
+
+force_pyramid_sides = config.getint('eval_settings', 'force_pyramid_sides')
+force_pyramid_radius = config.getfloat('eval_settings', 'force_pyramid_radius')
 
 use_gui = config.getboolean('gui_settings', 'use_gui')
 debug_lines = config.getboolean('gui_settings', 'debug_lines')
@@ -277,31 +280,32 @@ def relax(rID):
 class Grasp:
 
     def __init__(self, robot_position, robot_orientation, robot_joints,
-                 init_object_position, init_object_orientation,
-                 final_object_position, final_object_orientation):
+                 final_object_position, final_object_orientation, vol, ep):
         self.robot_pose = (robot_position, robot_orientation)
         self.robot_joints = robot_joints
-        self.init_object_pose = (init_object_position, init_object_orientation)
         self.final_object_pose = (final_object_position, final_object_orientation)
+        self.vol = vol
+        self.ep = ep
 
     def __repr__(self):
-        return "ROBOT: Position: " + str(self.position) + \
-               " , Orientation: " + str(self.orientation) + \
-               " , Joints: " + str(self.joints) + " "
+        return "ROBOT: Pose: " + str(self.robot_pose) + " , Joints: " + str(self.robot_joints) + \
+               " OBJECT: Pose: " + str(self.final_object_pose) + \
+               " QUALITY: Volume" + str(self.vol)+ " , Epsilon: " + str(self.vol) + " "
 
     def __str__(self):
-        return "Position: " + str(self.position) + \
-               " , Orientation: " + str(self.orientation) + \
-               " , Joints: " + str(self.joints) + " "
+        return "ROBOT: Pose: " + str(self.robot_pose) + " , Joints: " + str(self.robot_joints) + \
+               " OBJECT: Pose: " + str(self.final_object_pose) + \
+               " QUALITY: Volume" + str(self.vol)+ " , Epsilon: " + str(self.vol) + " "
 
-
-def get_robot_config(handID, objectID):
-    pos, oren = p.getBasePositionAndOrientation(handID)
+def get_robot_config(rID, oID):
+    r_pos, r_oren = p.getBasePositionAndOrientation(rID)
     joints = {}
-    num = p.getNumJoints(handID)
+    num = p.getNumJoints(rID)
     for joint in range(0, num):
-        joints[joint] = p.getJointState(handID, joint)
-    return Grasp(pos, oren, joints)
+        joints[joint] = p.getJointState(rID, joint)
+    o_pos, o_oren = p.getBasePositionAndOrientation(oID)
+    vol, ep = grip_qual(rID,oID)
+    return Grasp(r_pos, r_oren, joints, o_pos, o_oren, vol, ep)
 
 
 """#####################################################################################################################
@@ -309,67 +313,160 @@ def get_robot_config(handID, objectID):
 #####################################################################################################################"""
 
 
-def check_grip(cubeID, handID):
+def check_grip(oID, rID):
     """
     check grip by adding in gravity
     """
-    print("checking strength of current grip")
+    #print("checking strength of current grip")
     mag = 1
-    pos, oren = p.getBasePositionAndOrientation(handID)
+    pos, oren = p.getBasePositionAndOrientation(rID)
     time_limit = .5
     finish_time = time() + time_limit
     p.addUserDebugText("Grav Check!", [-.07, .07, .07], textColorRGB=[0, 0, 1], textSize=1)
     while time() < finish_time:
         p.stepSimulation()
-        p.applyExternalForce(cubeID, linkIndex=-1, forceObj=[0, 0, -mag], posObj=pos, flags=p.WORLD_FRAME)
-    contact = p.getContactPoints(cubeID, handID)  # see if hand is still holding obj after gravity is applied
+        p.applyExternalForce(oID, linkIndex=-1, forceObj=[0, 0, -mag], posObj=pos, flags=p.WORLD_FRAME)
+    contact = p.getContactPoints(oID, rID)  # see if hand is still holding obj after gravity is applied
     if len(contact) > 0:
         p.removeAllUserDebugItems()
         p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
+        print("Grav Check Passed")
         sleep(.2)
-        return get_robot_config(handID)
+        return get_robot_config(rID, oID)
     else:
         p.removeAllUserDebugItems()
         p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
+        print("Grav Check Failed")
         sleep(.2)
         return None
 
 
-
-"""#####################################################################################################################
-                                        MAIN MAIN MAIN MAIN MAIN MAIN
-#####################################################################################################################"""
-def check_grip(cubeID, handID):
-    """
-    check grip by adding in gravity
-    """
-    print("checking strength of current grip")
-    mag = 1
-    pos, oren = p.getBasePositionAndOrientation(handID)
-    # pos, oren = p.getBasePositionAndOrientation(cubeID)
-    time_limit = .5
-    finish_time = time() + time_limit
-    if debug_text:
-        p.addUserDebugText("Grav Check!", [-.07, .07, .07], textColorRGB=[0, 0, 1], textSize=1)
-    while time() < finish_time:
-        p.stepSimulation()
-        # add in "gravity"
-        p.applyExternalForce(cubeID, linkIndex=-1, forceObj=[0, 0, -mag], posObj=pos, flags=p.WORLD_FRAME)
-    contact = p.getContactPoints(cubeID, handID)  # see if hand is still holding obj after gravity is applied
-    print("contacts", contact)
+def grip_qual(oID, rID):
+    contact = p.getContactPoints(oID, rID)  # see if hand is still holding obj after gravity is applied
     if len(contact) > 0:
-        p.removeAllUserDebugItems()
-        if debug_text:
-            p.addUserDebugText("Grav Check Passed!", [-.07, .07, .07], textColorRGB=[0, 1, 0], textSize=1)
-        sleep(.3)
-        return get_robot_config(handID)
-
+        force_torque = gws_pyramid_extension(rID, oID)
+        #print("force_torque: ", force_torque)
+        #print("force_torque shape: ", np.array(force_torque).shape)
+        vol = volume(force_torque)
+        #print("volume: ", vol)
+        ep = eplison(force_torque)
+        #print("eplison: ", ep)
     else:
-        p.removeAllUserDebugItems()
-        if debug_text:
-            p.addUserDebugText("Grav Check Failed!", [-.07, .07, .07], textColorRGB=[1, 0, 0], textSize=1)
-        sleep(.3)
-        return None
+        vol = None
+        ep = None
+    return vol, ep
+
+
+def get_obj_info(oID): #TODO: what about not mesh objects?
+    obj_data = p.getCollisionShapeData(oID, -1)[0]
+    geometry_type = obj_data[2]
+    #print("geometry type: " + str(geometry_type))
+    dimensions = obj_data[3]
+    #print("dimensions: "+ str(dimensions))
+    local_frame_pos = obj_data[5]
+    #print("local frome position: " + str(local_frame_pos))
+    local_frame_orn = obj_data[6]
+    #print("local frame oren: " + str(local_frame_orn))
+    diagonal = sqrt(dimensions[0]**2+dimensions[1]**2+dimensions[2]**2)
+    #print("diagonal: ", diagonal)
+    max_radius = diagonal/2
+    return local_frame_pos, max_radius
+
+
+def gws(rID, oID):
+    print("eval gws")
+    local_frame_pos, max_radius = get_obj_info(oID)
+    #sim uses center of mass as a reference for the Cartesian world transforms in getBasePositionAndOrientation
+    obj_pos, obj_orn = p.getBasePositionAndOrientation(oID)
+    force_torque = []
+    contact_points = p.getContactPoints(rID, oID)
+    for point in contact_points:
+        contact_pos = point[6]
+        normal_vector_on_obj = point[7]
+        normal_force_on_obj = point[9]
+        force_vector = np.array(normal_vector_on_obj)*normal_force_on_obj
+
+
+        radius_to_contact = np.array(contact_pos) - np.array(obj_pos)
+        torque_numerator = np.cross(radius_to_contact, force_vector)
+        torque_vector = torque_numerator/max_radius
+
+        force_torque.append(np.concatenate([force_vector, torque_vector]))
+
+    return force_torque
+
+
+def get_new_normals(force_vector, normal_force, sides, radius):
+    return_vectors = []
+    #get arbitrary vector to get cross product which should be orthogonal to both
+    vector_to_cross = np.array((force_vector[0]+1,force_vector[1]+2,force_vector[2]+3))
+    orthg = np.cross(force_vector, vector_to_cross)
+    orthg_vector = (orthg/np.linalg.norm(orthg))*radius
+    rot_angle = (2*pi)/sides
+    split_force = normal_force/sides
+
+    for side_num in range(0,sides):
+        rotated_orthg = Quaternion(axis=force_vector, angle=(rot_angle*side_num)).rotate(orthg_vector)
+        new_vect = force_vector+np.array(rotated_orthg)
+        norm_vect = (new_vect/np.linalg.norm(new_vect))*split_force
+        return_vectors.append(norm_vect)
+
+    return return_vectors
+
+
+def gws_pyramid_extension(rID, oID, pyramid_sides=force_pyramid_sides, pyramid_radius=force_pyramid_radius):
+    local_frame_pos, max_radius = get_obj_info(oID)
+    #sim uses center of mass as a reference for the Cartesian world transforms in getBasePositionAndOrientation
+    obj_pos, obj_orn = p.getBasePositionAndOrientation(oID)
+    force_torque = []
+    contact_points = p.getContactPoints(rID, oID)
+    for point in contact_points:
+        contact_pos = point[6]
+        normal_vector_on_obj = point[7]
+        normal_force_on_obj = point[9]
+        force_vector = np.array(normal_vector_on_obj)*normal_force_on_obj
+        if np.linalg.norm(force_vector) > 0:
+            new_vectors = get_new_normals(force_vector, normal_force_on_obj, pyramid_sides, pyramid_radius)
+
+            radius_to_contact = np.array(contact_pos) - np.array(obj_pos)
+
+            for pyramid_vector in new_vectors:
+                torque_numerator = np.cross(radius_to_contact, pyramid_vector)
+                torque_vector = torque_numerator/max_radius
+                force_torque.append(np.concatenate([pyramid_vector, torque_vector]))
+
+    return force_torque
+
+
+def volume(force_torque):
+    """
+    get qhull of the 6 dim vectors [fx, fy, fz, tx, ty, tz] created by gws (from contact points)
+    get the volume
+    """
+    vol = ConvexHull(points = force_torque)
+    return vol.volume
+
+
+def eplison(force_torque):
+    """
+    get qhull of the 6 dim vectors [fx, fy, fz, tx, ty, tz] created by gws (from contact points)
+    get the distance from centroid of the hull to the closest vertex
+    """
+    hull = ConvexHull(points=force_torque)
+    centroid = []
+    for dim in range(0,6):
+        centroid.append(np.mean(hull.points[hull.vertices, dim]))
+    shortest_distance = 500000000
+    closest_point = None
+    for point in force_torque:
+        point_dist = distance.euclidean(centroid, point)
+        if point_dist < shortest_distance:
+            shortest_distance = point_dist
+            closest_point = point
+
+    return shortest_distance
+
+
 
 """#####################################################################################################################
                                         MAIN MAIN MAIN MAIN MAIN MAIN
@@ -377,16 +474,16 @@ def check_grip(cubeID, handID):
 
 
 print("grasp!")
-handID = reset_hand()
-cubeID = reset_ob()
+rID = reset_hand()
+oID = reset_ob()
 
 print("Sphere Set")
-hand_set = sphere_set(rID=handID, oID=cubeID)
+hand_set = sphere_set(rID=rID, oID=oID)
 #hand_set = rand_set(rID=handID, oID=cubeID, n=45)
 print(hand_set)
 
-handID = reset_hand()
-cubeID = reset_ob(cubeID, [0, 0, 0])
+rID = reset_hand()
+oID = reset_ob(oID, [0, 0, 0])
 
 good_grips = []
 
@@ -399,15 +496,19 @@ for pose in hand_set:
         poses = poses + rotated_poses
 
     for pose in poses:
-        print("position #: ", pos)
-        relax(handID)
+        print(" ")
+        print("Pose #: ", pos)
+        relax(rID)
         p.removeAllUserDebugItems()
-        p.resetBasePositionAndOrientation(handID, pose[0], pose[1])
+        p.resetBasePositionAndOrientation(rID, pose[0], pose[1])
         if debug_lines:
-            add_debug_lines(handID)
-        cubeID = reset_ob(cubeID, [0, 0, 0], fixed=False)
-        grasp(handID)
-        good_grips.append(check_grip(cubeID, handID))
+            add_debug_lines(rID)
+        oID = reset_ob(oID, [0, 0, 0], fixed=False)
+        grasp(rID)
+        vol, ep = grip_qual(oID, rID)
+        print("Volume: ", vol)
+        print("Epslion: ", ep)
+        good_grips.append(check_grip(oID, rID))
         pos += 1
 
 
