@@ -2,10 +2,42 @@
 __Carlyn Dougherty (ccd2134@columbia.edu)__
 
 
-__Main Idea:__ replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet (https://pybullet.org/wordpress/) to 
+##__FOUNDATION:__ 
+__Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet (https://pybullet.org/wordpress/). 
+
+####__Graspit! Overview:__
+* Tool for grasping research: simulator that can accommodate arbitrary hand and robot designs. 
+* Uses ROS/Gazebo
+* Loads objects/obstacles of arbitrary geometry 
+* Collision detection/contact
+* Grasp quality metrics, both numeric/visual
+* Key Use: development tool -  execute and test various robot control algorithms in simulation for grasp-grasp-dependent needs
+* Key Use: computational platform: in addition to real-world action, adds in ability to plan grasps as needed 
+
+####__Why switch to PyBullet:__
+* Python lends itself toward quick development 
+* Not reliant on ROS/Gazebo or any particular OS
+* Easier use of arbitrary URDF/SDF/etc + better solution for arbitrary robotic hands (still w/config, streamlined)
+* Bullet dynamics/kinematics/collisions allows for some better opportunities for simulations
+* Make as adaptable as possible for ability to adapt later
+* Time speedups possible if needed (C++, no GUI, etc)
 
 
-## Method #1: List Planner: 
+## Key Features: 
+### __Grasp Planning:__
+#### _List Planner:_
+#### _Future Work:_ 
+
+### __Grasp Evaluation Metrics:__ 
+#### _Gravity:_
+#### _Distance Moved:_ 
+#### _Epsilon:_ 
+#### _Volume:_ 
+ 
+
+
+
+## Usage: 
 The goal here is to get the most simple form of a grasp planner working first, then move on to more sophisticated methods
 
 __To Use:__
@@ -29,17 +61,19 @@ __To Use:__
     - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple
 
 
+##NOTES:
 
-All the files in the ObjectURDFs folder are from the PyBullet examples folder. Here [on GitHub](https://github.com/bulletphysics/bullet3/tree/master/data).
+#### On Object files: 
+All the files in the ObjectURDFs folder are from the PyBullet examples folder. This can be found [here](https://github.com/bulletphysics/bullet3/tree/master/data) on GitHub.
 
 
-##### Notes on URDFs: (based on needs for  barrett hand)
+#### On URDFs: (based on needs for  barrett hand)
 
 __If you have a depreciated .xacro:__ update/clean up using this script in all folders with .xacro files (dependancies and all) - specifically the robots + urdf files for barrett_hand
 ```sh
 $ find . -iname "*.xacro" | xargs sed -i 's#<\([/]\?\)\(if\|unless\|include\|arg\|property\|macro\|insert_block\)#<\1xacro:\2#g'
 ```
-__In the robots folder (because all the ones in the urdf folder depend on this one):__ convert the urdf.xacro to urdf 
+__In the robots folder (all the files in the urdf folder depend on this one):__ convert the urdf.xacro to urdf 
 ```sh
 $ source ~/catkin_ws/devel/setup.bash
 $ rosrun xacro xacro --inorder name.urdf.xacro > name.urdf
