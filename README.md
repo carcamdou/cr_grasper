@@ -49,11 +49,6 @@ From the force/torque vectors calculated for each grasp, create a 6 dimensional 
 ##### Epsilon:
 Distance from the centroid of the 6 dimensional hull to the closest vector
 
- 
-### __Grasp Evaluation Metrics:__ 
-#### _Gravity:_
-
-
 
 ## Usage: 
 The goal here is to get the most simple form of a grasp planner working first, then move on to more sophisticated methods
