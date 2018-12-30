@@ -33,9 +33,6 @@ Hand distance is chosen by moving the fingers splayed until the hand/palm hits t
 Currently, the whole hand is rotated around the wrist axis for each grasp a user specified number of times. 
 
 
-#### _Future Work:_ 
-More advanced choices for grasps. Replacing the Eigengrasp Planner which relies on hand posture space dimensionality reduction and the Database Planner family, which relies on a huge database of pre-computed grasps to plan grasps for novel objects. These two can be found in Graspit!
-
 ### __Grasp Evaluation Metrics:__ 
 #### _Gravity:_
 Using the Pybullet dynamics, a force in the downward direction is applied to the object. This simulates the influence of gravity and gives one metric for the success of a grasp - the binary evaluation of remaining in the gripper or not.  
@@ -54,7 +51,7 @@ Distance from the centroid of the 6 dimensional hull to the closest vector
 The goal here is to get the most simple form of a grasp planner working first, then move on to more sophisticated methods
 
 __To Use:__
-* __Edit + run write_config__  
+* __Edit + run write_config.py__  
     - file_paths
         - __robot_path__ - relative path from grasper.py to robot hand URDF file
         - __object_path__ - path to object URDF file
@@ -82,8 +79,12 @@ __To Use:__
 * __Run grasper.py__
     - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple
 
+## __Future Work:__  
+More advanced choices for grasps. Replacing the Eigengrasp Planner which relies on hand posture space dimensionality reduction and the Database Planner family, which relies on a huge database of pre-computed grasps to plan grasps for novel objects. These two can be found in Graspit!
 
-##NOTES:
+
+
+## NOTES:
 
 #### On Object files: 
 All the files in the ObjectURDFs folder are from the PyBullet examples folder. This can be found [here](https://github.com/bulletphysics/bullet3/tree/master/data) on GitHub.
