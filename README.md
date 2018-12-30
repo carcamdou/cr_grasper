@@ -2,10 +2,10 @@
 __Carlyn Dougherty (ccd2134@columbia.edu)__
 
 
-##__FOUNDATION:__ 
+## __FOUNDATION:__ 
 __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet (https://pybullet.org/wordpress/). 
 
-####__Graspit! Overview:__
+#### __Graspit! Overview:__
 * Tool for grasping research: simulator that can accommodate arbitrary hand and robot designs. 
 * Uses ROS/Gazebo
 * Loads objects/obstacles of arbitrary geometry 
@@ -14,7 +14,7 @@ __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a s
 * Key Use: development tool -  execute and test various robot control algorithms in simulation for grasp-grasp-dependent needs
 * Key Use: computational platform: in addition to real-world action, adds in ability to plan grasps as needed 
 
-####__Why switch to PyBullet:__
+#### __Why switch to PyBullet:__
 * Python lends itself toward quick development 
 * Not reliant on ROS/Gazebo or any particular OS
 * Easier use of arbitrary URDF/SDF/etc + better solution for arbitrary robotic hands (still w/config, streamlined)
