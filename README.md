@@ -48,6 +48,8 @@ This is based on Graspit! techniques and more details on that can be found [here
 
 ![GWS](https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png)
 
+<img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png" width="150">
+
 ##### Volume: 
 From the force/torque vectors calculated for each grasp, create a 6 dimensional convex hull. Then take the volume of that convex hull. 
 ##### Epsilon:
