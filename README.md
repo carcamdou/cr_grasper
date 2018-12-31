@@ -35,12 +35,25 @@ The hand circles the object and makes grasps at regular intervals on the sphere 
 
 Hand distance is chosen by moving the fingers splayed until the hand/palm hits the target. This allows for the closest grasp.
 
+<p align="center">
+    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/palm%20to%20object.gif" width="200">
+</p>
+
 Currently, the whole hand is rotated around the wrist axis for each grasp a user specified number of times. 
 
+
+<p align="center">
+    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/wrist%20rotation.gif" width="200">
+</p>
 
 ### __Grasp Evaluation Metrics:__ 
 #### _Gravity:_
 Using the Pybullet dynamics, a force in the downward direction is applied to the object. This simulates the influence of gravity and gives one metric for the success of a grasp - the binary evaluation of remaining in the gripper or not.  
+
+<p align="center">
+    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/grav%20check.gif" width="200">
+</p>
+
 #### _Distance Moved:_ 
 While this is just a rough estimation (further work could be done here) the distance that an object moves from it's original pose (position, orientation) might indicate the replicability of the grasp and therefore give some understanding of how easily it will translate from simulation to the real world. 
 #### _Contact Point Evaluations:_ 
