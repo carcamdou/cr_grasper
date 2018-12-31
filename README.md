@@ -107,7 +107,7 @@ __To Use:__
         - __debug_text__ - shows text on screen to update the user
        
 * __Run grasper.py__
-    - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple
+    - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple. Also returned is the final pose of the object and the grasp quality metrics (volume and epsilson). At the moment, only grasps that pass the gravity check threshold are returned. 
 
 ## __Future Work:__  
 More advanced choices for grasps. Replacing the Eigengrasp Planner which relies on hand posture space dimensionality reduction and the Database Planner family, which relies on a huge database of pre-computed grasps to plan grasps for novel objects. These two can be found in Graspit!
