@@ -14,7 +14,10 @@ __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a s
 * Key Use: development tool -  execute and test various robot control algorithms in simulation for grasp-grasp-dependent needs
 * Key Use: computational platform: in addition to real-world action, adds in ability to plan grasps as needed 
 
-<img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/graspit.png" width="200">
+<p align="center">
+    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/graspit.png" width="200">
+</p>
+
 
 #### __Why switch to PyBullet:__
 * Python lends itself toward quick development 
@@ -46,7 +49,10 @@ For each of the contact points between the object and the robotic hand, force an
 
 This is based on Graspit! techniques and more details on that can be found [here.](https://graspit-simulator.github.io/build/html/grasp_quality.html) The friction cones made from each contact point are shown in the image below (also from graspit!).
 
-<img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png" width="200">
+<p align="center">
+    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png" width="200">
+</p>
+
 
 ##### Volume: 
 From the force/torque vectors calculated for each grasp, create a 6 dimensional convex hull. Then take the volume of that convex hull. 
