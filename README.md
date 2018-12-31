@@ -32,10 +32,9 @@ __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a s
 ### __Grasp Planning:__
 #### _List Planner:_
 The hand circles the object and makes grasps at regular intervals on the sphere around the object. The number of intervals around a sphere and also the number of attempts made for each circumnavigation are user specified. 
-https://github.com/carcamdou/cr_grasper/blob/master/rm_images/global%20rotations.mp4
 
 <p align="center">
-    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/palm%20to%20object.gif" width="200">
+    <img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/global%20rotations.gif" width="200">
 </p>
 
 Hand distance is chosen by moving the fingers splayed until the hand/palm hits the target. This allows for the closest grasp.
