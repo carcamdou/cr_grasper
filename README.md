@@ -14,7 +14,7 @@ __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a s
 * Key Use: development tool -  execute and test various robot control algorithms in simulation for grasp-grasp-dependent needs
 * Key Use: computational platform: in addition to real-world action, adds in ability to plan grasps as needed 
 
-![Graspit! Example](https://github.com/carcamdou/cr_grasper/blob/master/rm_images/graspit.png)
+<img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/graspit.png" width="200">
 
 #### __Why switch to PyBullet:__
 * Python lends itself toward quick development 
@@ -44,11 +44,9 @@ While this is just a rough estimation (further work could be done here) the dist
 ##### Grasp Wrench Space: 
 For each of the contact points between the object and the robotic hand, force and torque are calculated in 3 dimensions. The combination of these two create a 6 dimensional vector used to create some numerical metric for grasps. To extend the amount of usable vectors, each contact point uses an n-sided pyramid to create n different Force/Torque vectors for each contact point. The dimensions of this pyramid can be adjusted by the user. If there are sufficent contact points between the hand and the object, then no pyramid need be used. 
 
-This is based on Graspit! techniques and more details on that can be found [here.](https://graspit-simulator.github.io/build/html/grasp_quality.html) 
+This is based on Graspit! techniques and more details on that can be found [here.](https://graspit-simulator.github.io/build/html/grasp_quality.html) The friction cones made from each contact point are shown in the image below (also from graspit!).
 
-![GWS](https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png)
-
-<img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png" width="150">
+<img src="https://github.com/carcamdou/cr_grasper/blob/master/rm_images/gws.png" width="200">
 
 ##### Volume: 
 From the force/torque vectors calculated for each grasp, create a 6 dimensional convex hull. Then take the volume of that convex hull. 
