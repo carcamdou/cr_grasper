@@ -6,29 +6,6 @@ Robotics Research, Fall 2018
 
 """
 
-
-#gripper
-#finger hand
-
-#if use GUI in config
-
-
-#TODO: self collision issues - pubullet
-#TODO: simulated annealing (which is better grasps)
-#TODO: underactuation???? splaying too far back
-#TODO: give the hand some sensitivity for grasping - force sensors for fingertips?
-#TODO: make grasp mirror barret hand irl = that means make the base joint close before tip joint in hand
-#TODO: make direction of motion consistant (up and away from origin?)
-#TODO: modify to take in hand and cube position/orientation + load into environment w/gravity before shaking
-#TODO: edit Grasp to more closely align with other standards
-
-
-#TODO: figure out another hand
-#TODO: make grasp mirror barret hand irl = that means make the base joint close before tip joint in hand
-
-########################################################################################################################
-
-
 import pybullet as p
 from math import pi, sqrt
 import pybullet_data
@@ -225,6 +202,7 @@ def rand_set(rID, oID, dist=init_grasp_distance, n=10):
     """
     get n pairs for the hand randomly distributed dist away from the origin
     returns an array of (position, orientation) pairs
+    TODO: make this more uniformly distributed https://www.cmu.edu/biolphys/deserno/pdf/sphere_equi.pdf
     """
     set = []
 

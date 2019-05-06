@@ -147,10 +147,13 @@ __To Use:__
 * __Run grasper.py__
     - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple. Also returned is the final pose of the object and the grasp quality metrics (volume and epsilson). At the moment, only grasps that pass the gravity check threshold are returned. 
 
-## __Future Work:__  
+## __Future Work (where to go from here):__  
 * More advanced choices for grasps
     *  having variable movement for different fingers
     *  developing a model for a human-like dexterous hand
+    *  give the hand some sensitivity for grasping; ie, force sensors for fingertips
+    *  Add support for different types of hands - specifically parallel grippers and those with more than 3 fingers
+
 * Replacing the GraspIt grasp planners
     * Eigengrasp Planner (which relies on hand posture space dimensionality reduction)
     * Database Planner (which relies on a huge database of pre-computed grasps to plan grasps for novel objects.)
@@ -161,7 +164,7 @@ __To Use:__
     * Certain portions could be written in the C++ Bullet rather than PyBullet if needed
 * Integration with real robots
     * testing the real-world results based on the pybullet dynamics 
-
+    * make sure finger movements are fully constricted to the same as the real world - should be defined by URDF but there seems to be a gap
 
 
 

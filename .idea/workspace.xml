@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b65014d3-297d-45db-8ec7-1a4cfae2e43c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/handoff.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cr_grasper/config.ini" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cr_grasper/grasper.py" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/grasper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handoff.md" beforeDir="false" afterPath="$PROJECT_DIR$/handoff.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision01.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision02.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision03.obj" beforeDir="false" />
@@ -58,15 +55,15 @@
           <entry key="LICENSE" value="19" />
           <entry key="dummy" value="46" />
           <entry key="ini" value="108" />
-          <entry key="md" value="7023" />
-          <entry key="py" value="7431" />
+          <entry key="md" value="7364" />
+          <entry key="py" value="7478" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="7023" />
+          <entry key="Markdown" value="7364" />
           <entry key="PLAIN_TEXT" value="173" />
-          <entry key="Python" value="7431" />
+          <entry key="Python" value="7478" />
         </counts>
       </usages-collector>
     </session>
@@ -79,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6420">
-              <caret line="428" column="74" selection-start-line="428" selection-start-column="74" selection-end-line="428" selection-end-column="74" />
+            <state relative-caret-position="-108">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
                 <element signature="e#959#979#0" expanded="true" />
               </folding>
@@ -92,8 +89,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-78">
-                <caret line="20" selection-start-line="20" selection-end-line="20" />
+              <first_editor relative-caret-position="255">
+                <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
               </first_editor>
               <second_editor />
             </state>
@@ -104,8 +101,8 @@
         <entry file="file://$PROJECT_DIR$/handoff.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="1350">
-                <caret line="90" column="11" lean-forward="true" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+              <first_editor relative-caret-position="257">
+                <caret line="170" column="6" lean-forward="true" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
               </first_editor>
               <second_editor />
             </state>
@@ -408,7 +405,7 @@
     <frame x="58" y="23" width="1382" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.08008817" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.11682586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.12897196" side_tool="true" weight="0.25581396" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -556,31 +553,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-78">
-            <caret line="20" selection-start-line="20" selection-end-line="20" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6420">
-          <caret line="428" column="74" selection-start-line="428" selection-start-column="74" selection-end-line="428" selection-end-column="74" />
+        <state relative-caret-position="-108">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#959#979#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="255">
+            <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/handoff.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1350">
-            <caret line="90" column="11" lean-forward="true" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+          <first_editor relative-caret-position="257">
+            <caret line="170" column="6" lean-forward="true" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
           </first_editor>
           <second_editor />
         </state>
