@@ -3,7 +3,7 @@ __Carlyn Dougherty (ccd2134@columbia.edu)__
 
 
 ## __FOUNDATION:__ 
-__Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet (https://pybullet.org/wordpress/). 
+__Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a similar simulator using Pybullet 
 
 #### __Graspit! Overview:__
 * Tool for grasping research: simulator that can accommodate arbitrary hand and robot designs. 
@@ -28,7 +28,45 @@ __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a s
 * Time speedups possible if needed (C++, no GUI, etc)
 
 
-## Key Features: 
+##Get Started: pick up and adapt this project from here
+
+The attempt was to make this as OS independent as possible as well as remove dependencies from ROS and Gazebo. 
+<br>
+
+
+#####Some reading/researching to situate yourself in this project:
+
+######Resources + Tools:
+Python 3.6 [Docs](https://docs.python.org/3/) <br>
+PyBullet [Homepage](https://pybullet.org/wordpress/) <br>
+* The documentation is limited somewhat to this [quickstart guide](https://docs.google.com/document/d/10sXEhzFRSnvFcl3XxNGhnD4N2SedqwdAvK3dsihxVUA/edit#heading=h.2ye70wns7io3)
+* Not everything from bullet has been transfered over to pybullet, but the system is built on Bullet Physics (C++, found [here](https://github.com/bulletphysics/bullet3) )
+URDF Overview [here](http://wiki.ros.org/urdf/Tutorials)
+######Theoretical background/papers:
+* Original GraspIt! 
+    * Andrew Miller and Peter K. Allen, Graspit!: A Versatile Simulator for Robotic Grasping
+    * Gives a good overview of the scope of this project 
+    * [link](http://www.cs.columbia.edu/~allen/PAPERS/graspit.final.pdf)
+* Columbia Grasp Database
+    * Corey Goldfeder, Matei Ciocarlie, Hao Dang and Peter K. Allen: The Columbia Grasp Database
+    * Grasp database of good grasps for objects and hands - can use to match best object/grasp to current situation
+    * [link](http://www.cs.columbia.edu/~allen/PAPERS/icra_7page_pub.pdf)
+* Grasp Planning
+    *  C. Ferrari and J. Canny, “Planning optimal grasps”
+    * To understand grasp wrench space and the math behind grasp metrics 
+    * [link](https://people.eecs.berkeley.edu/~jfc/papers/92/FCicra92.pdf)
+* Eigengrasps
+    * Matei Ciocarlie, Corey Goldfeder, Peter Allen: Dimensionality reduction for hand-independent dexterous robotic grasping
+    * Example of simulated Annealing use 
+    * [link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4399227)
+* Simulated Annealing
+    * L. Ingber, “Very fast simulated re-annealing,”
+    * The math behind this
+    * [link](https://www.sciencedirect.com/science/article/pii/0895717789902021)
+
+
+
+## Current Key Features: 
 ### __Grasp Planning:__
 #### _List Planner:_
 The hand circles the object and makes grasps at regular intervals on the sphere around the object. The number of intervals around a sphere and also the number of attempts made for each circumnavigation are user specified. 
@@ -108,17 +146,26 @@ __To Use:__
        
 * __Run grasper.py__
     - Should return a list of good grasps specified by a (Position, Orientation, Joint Angle) Tuple. Also returned is the final pose of the object and the grasp quality metrics (volume and epsilson). At the moment, only grasps that pass the gravity check threshold are returned. 
-    - From this point the grasps can be recreated using the Object/Hand positions and orientations 
-
-
-
 
 ## __Future Work:__  
-More advanced choices for grasps. Replacing the Eigengrasp Planner which relies on hand posture space dimensionality reduction and the Database Planner family, which relies on a huge database of pre-computed grasps to plan grasps for novel objects. These two can be found in Graspit!
+* More advanced choices for grasps
+    *  having variable movement for different fingers
+    *  developing a model for a human-like dexterous hand
+* Replacing the GraspIt grasp planners
+    * Eigengrasp Planner (which relies on hand posture space dimensionality reduction)
+    * Database Planner (which relies on a huge database of pre-computed grasps to plan grasps for novel objects.)
+        * to this aim, a large database of precomputed grasps could be interesting here, particularly if the object/hand pipeline could be sufficiently automated in the collecton of data
+* Some robust speedups
+    * Not reloading the hand as much as I have done
+    * Multithreadding support
+    * Certain portions could be written in the C++ Bullet rather than PyBullet if needed
+* Integration with real robots
+    * testing the real-world results based on the pybullet dynamics 
 
 
 
-## NOTES:
+
+## NB:
 
 #### On Object files: 
 All the files in the ObjectURDFs folder are from the PyBullet examples folder. This can be found [here](https://github.com/bulletphysics/bullet3/tree/master/data) on GitHub.

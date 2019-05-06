@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b65014d3-297d-45db-8ec7-1a4cfae2e43c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/handoff.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cr_grasper/config.ini" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cr_grasper/grasper.py" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/grasper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cr_grasper/hand_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/hand_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision01.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision02.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision03.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision04.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision05.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision06.obj" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,42 +24,49 @@
     <session id="-1579835684">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.4" value="3" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="1" />
-          <entry key="ini" value="4" />
-          <entry key="md" value="3" />
-          <entry key="py" value="14" />
-          <entry key="urdf" value="3" />
+          <entry key="ini" value="13" />
+          <entry key="md" value="4" />
+          <entry key="obj" value="1" />
+          <entry key="py" value="23" />
+          <entry key="urdf" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Markdown" value="3" />
-          <entry key="PLAIN_TEXT" value="8" />
-          <entry key="Python" value="14" />
+          <entry key="Markdown" value="4" />
+          <entry key="PLAIN_TEXT" value="19" />
+          <entry key="Python" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="LICENSE" value="19" />
-          <entry key="dummy" value="29" />
-          <entry key="ini" value="16" />
-          <entry key="md" value="460" />
-          <entry key="py" value="1722" />
+          <entry key="dummy" value="46" />
+          <entry key="ini" value="108" />
+          <entry key="md" value="7023" />
+          <entry key="py" value="7431" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="460" />
-          <entry key="PLAIN_TEXT" value="64" />
-          <entry key="Python" value="1722" />
+          <entry key="Markdown" value="7023" />
+          <entry key="PLAIN_TEXT" value="173" />
+          <entry key="Python" value="7431" />
         </counts>
       </usages-collector>
     </session>
@@ -63,30 +79,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="124" column="87" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="87" />
+            <state relative-caret-position="6420">
+              <caret line="428" column="74" selection-start-line="428" selection-start-column="74" selection-end-line="428" selection-end-column="74" />
               <folding>
-                <element signature="e#313#333#0" expanded="true" />
-                <marker date="1544737313027" expanded="true" signature="3968:3969" ph="..." />
+                <element signature="e#959#979#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cr_grasper/write_config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="-78">
+                <caret line="20" selection-start-line="20" selection-end-line="20" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cr_grasper/hand_info.py">
+        <entry file="file://$PROJECT_DIR$/handoff.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="1350">
+                <caret line="90" column="11" lean-forward="true" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ObjectURDFs/jenga/jenga.obj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="72" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cr_grasper/gws.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1695">
+              <caret line="121" column="72" selection-start-line="121" selection-start-column="72" selection-end-line="121" selection-end-column="75" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,12 +149,21 @@
       <find>time_limit</find>
       <find>maxForce</find>
       <find>robot_path</find>
-      <find>reset_hand</find>
       <find>reset_ob</find>
       <find>circle_set</find>
       <find>reset_h</find>
-      <find>reset</find>
       <find>reset_</find>
+      <find>relax</find>
+      <find>reset</find>
+      <find>reset_hand</find>
+      <find>distance</find>
+      <find>cross</find>
+      <find>diagonal</find>
+      <find>volume</find>
+      <find>rand_coord</find>
+      <find>rand_set</find>
+      <find>rand</find>
+      <find>get_given_point</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -127,18 +178,23 @@
         <option value="$PROJECT_DIR$/cr_grasper/config.py" />
         <option value="$PROJECT_DIR$/cr_grasper/crg.py" />
         <option value="$PROJECT_DIR$/cr_grasper/bh.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/URDF/box.urdf" />
         <option value="$PROJECT_DIR$/cr_grasper/config.ini" />
-        <option value="$PROJECT_DIR$/cr_grasper/write_config.py" />
-        <option value="$PROJECT_DIR$/cr_grasper/grasper.py" />
         <option value="$PROJECT_DIR$/cr_grasper/hand_info.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/rotate.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/gws.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/write_config.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/bh_config.ini" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/cr_grasper/grasper.py" />
+        <option value="$PROJECT_DIR$/handoff.md" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="58" />
     <option name="y" value="23" />
-    <option name="width" value="1440" />
+    <option name="width" value="1382" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -163,13 +219,7 @@
             <path>
               <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
               <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
-              <item name="RobotURDFs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
-              <item name="RobotURDFs" type="462c0819:PsiDirectoryNode" />
-              <item name="finger_description" type="462c0819:PsiDirectoryNode" />
+              <item name="rm_images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -178,6 +228,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/carlyndougherty/PycharmProjects/cr_grasper/README.md" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -187,6 +238,7 @@
       <recent name="$PROJECT_DIR$/cr_grasper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ObjectURDFs/plate" />
       <recent name="$PROJECT_DIR$/hand_descriptions" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -203,7 +255,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.hand_info">
+  <component name="RunManager" selected="Python.grasper">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
+      <module name="cr_grasper" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cr_grasper" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/rh8d_grasp_info.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="config" type="PythonConfigurationType" factoryName="Python">
       <module name="cr_grasper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -246,6 +319,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="gws" type="PythonConfigurationType" factoryName="Python">
+      <module name="cr_grasper" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cr_grasper" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/gws.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="hand_info" type="PythonConfigurationType" factoryName="Python">
       <module name="cr_grasper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -267,8 +361,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="rotate" type="PythonConfigurationType" factoryName="Python">
+      <module name="cr_grasper" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cr_grasper" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cr_grasper/rotate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.grasper" />
+      <item itemvalue="Python.gws" />
+      <item itemvalue="Python.rotate" />
+      <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.hand_info" />
       <item itemvalue="Python.config" />
     </list>
@@ -287,21 +405,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1440" height="877" extended-state="6" />
+    <frame x="58" y="23" width="1382" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.16208598" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.08008817" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.12897196" side_tool="true" weight="0.25581396" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33375797" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.32939634" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" visible="true" weight="0.32939634" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -332,13 +451,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/cr_grasper/config.py" />
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE" />
     <entry file="file://$PROJECT_DIR$/cr_grasper/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -354,28 +467,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cr_grasper/crg.py" />
-    <entry file="file://$PROJECT_DIR$/MyNotes.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNotes.md" />
     <entry file="file://$PROJECT_DIR$/ObjectURDFs/box.urdf" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="405">
-            <caret line="27" selection-start-line="27" selection-end-line="27" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ObjectURDFs/cube.urdf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ObjectURDFs/cube.urdf" />
     <entry file="file://$PROJECT_DIR$/RobotURDFs/finger_description/urdf/RH8D.urdf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7191" />
@@ -388,35 +482,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/config.ini">
+    <entry file="file://$PROJECT_DIR$/cr_grasper/config.ini" />
+    <entry file="file://$PROJECT_DIR$/cr_grasper/hand_info.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        <state relative-caret-position="418">
+          <caret line="31" column="8" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/rotate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="105" column="32" selection-start-line="105" selection-start-column="32" selection-end-line="105" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ObjectURDFs/plate/plate.urdf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pyquaternion/quaternion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/core/numeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="1718" selection-start-line="1718" selection-end-line="1718" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cr_grasper/write_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/bh_config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ObjectURDFs/jenga/jenga.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/gws.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1695">
+          <caret line="121" column="72" selection-start-line="121" selection-start-column="72" selection-end-line="121" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-78">
+            <caret line="20" selection-start-line="20" selection-end-line="20" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="124" column="87" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="87" />
+        <state relative-caret-position="6420">
+          <caret line="428" column="74" selection-start-line="428" selection-start-column="74" selection-end-line="428" selection-end-column="74" />
           <folding>
-            <element signature="e#313#333#0" expanded="true" />
-            <marker date="1544737313027" expanded="true" signature="3968:3969" ph="..." />
+            <element signature="e#959#979#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/hand_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="72" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
+    <entry file="file://$PROJECT_DIR$/handoff.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1350">
+            <caret line="90" column="11" lean-forward="true" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

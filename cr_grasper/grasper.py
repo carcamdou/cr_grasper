@@ -14,7 +14,6 @@ Robotics Research, Fall 2018
 
 
 #TODO: self collision issues - pubullet
-#TODO: figure out another hand
 #TODO: simulated annealing (which is better grasps)
 #TODO: underactuation???? splaying too far back
 #TODO: give the hand some sensitivity for grasping - force sensors for fingertips?
@@ -22,9 +21,10 @@ Robotics Research, Fall 2018
 #TODO: make direction of motion consistant (up and away from origin?)
 #TODO: modify to take in hand and cube position/orientation + load into environment w/gravity before shaking
 #TODO: edit Grasp to more closely align with other standards
-#TODO: return start + end position + quaternion to get a metric for how much the object moved in the grasp
-#TODO: other grasp measurement metrics - simulated annealing, etc
 
+
+#TODO: figure out another hand
+#TODO: make grasp mirror barret hand irl = that means make the base joint close before tip joint in hand
 
 ########################################################################################################################
 
@@ -91,7 +91,11 @@ def rand_coord():
     rand_phi = random.uniform(-pi / 2, pi / 2)
     return rand_theta, rand_phi
 
+
 def add_debug_lines(rID, line_dist=.3, line_width = 500):
+    """
+    Use pybullet's built-in line functionality to see the z/y/z coords of the hand
+    """
     p.addUserDebugLine([0, 0, 0], [line_dist, 0, 0], [1, 0, 0], parentObjectUniqueId=rID, parentLinkIndex=-1,
                        lineWidth=line_width)
     p.addUserDebugLine([0, 0, 0], [0, line_dist, 0], [0, 1, 0], parentObjectUniqueId=rID, parentLinkIndex=-1,
@@ -101,11 +105,14 @@ def add_debug_lines(rID, line_dist=.3, line_width = 500):
 
 
 def reset_hand(rID=None, rPos=(0, 0, -init_grasp_distance), rOr=(0, 0, 0, 1), fixed=True):
+    """
+    move the hand back to the starting pos
+    """
+
     if rID is not None:
         p.removeBody(rID)
 
-    rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr,
-                     useFixedBase=fixed, globalScaling=1)
+    rID = p.loadURDF(robot_path, basePosition=rPos, baseOrientation=rOr, useFixedBase=fixed, globalScaling=1)
     if debug_lines:
         add_debug_lines(rID)
 
@@ -113,6 +120,9 @@ def reset_hand(rID=None, rPos=(0, 0, -init_grasp_distance), rOr=(0, 0, 0, 1), fi
 
 
 def reset_ob(oID=None, oPos=(0, 0, 0), fixed=True):
+    """
+    reset by deleting
+    """
     if oID is not None:
         p.removeBody(oID)
 
@@ -121,6 +131,9 @@ def reset_ob(oID=None, oPos=(0, 0, 0), fixed=True):
     return oID
 
 def clean_up(rID):
+    """
+    remove robot + all associated debug feedback
+    """
     p.removeBody(rID)
     p.removeAllUserDebugItems()
 
@@ -223,6 +236,11 @@ def rand_set(rID, oID, dist=init_grasp_distance, n=10):
 
 
 def wrist_rotations(pose):
+    """
+    rotates the wrist of hand in place, increasing number of grasp possibilities for one position
+    """
+
+
     rotated_poses = []
     point = pose[0]
     quat = pose[1]
@@ -342,6 +360,9 @@ def check_grip(oID, rID):
 
 
 def grip_qual(oID, rID):
+    """
+    evaluate the grasp quality
+    """
     contact = p.getContactPoints(oID, rID)  # see if hand is still holding obj after gravity is applied
     if len(contact) > 0:
         force_torque = gws_pyramid_extension(rID, oID)
@@ -358,6 +379,9 @@ def grip_qual(oID, rID):
 
 
 def get_obj_info(oID): #TODO: what about not mesh objects?
+    """
+    get object data to figure out how far away the hand needs to be to make its approach
+    """
     obj_data = p.getCollisionShapeData(oID, -1)[0]
     geometry_type = obj_data[2]
     #print("geometry type: " + str(geometry_type))
@@ -374,6 +398,10 @@ def get_obj_info(oID): #TODO: what about not mesh objects?
 
 
 def gws(rID, oID):
+    """
+    calculate force/torque vectors for use in evaluation
+
+    """
     print("eval gws")
     local_frame_pos, max_radius = get_obj_info(oID)
     #sim uses center of mass as a reference for the Cartesian world transforms in getBasePositionAndOrientation
@@ -397,6 +425,9 @@ def gws(rID, oID):
 
 
 def get_new_normals(force_vector, normal_force, sides, radius):
+    """
+    utility function to help with GWS/pyramid extension for contact points
+    """
     return_vectors = []
     #get arbitrary vector to get cross product which should be orthogonal to both
     vector_to_cross = np.array((force_vector[0]+1,force_vector[1]+2,force_vector[2]+3))
@@ -415,6 +446,7 @@ def get_new_normals(force_vector, normal_force, sides, radius):
 
 
 def gws_pyramid_extension(rID, oID, pyramid_sides=force_pyramid_sides, pyramid_radius=force_pyramid_radius):
+    #often dont have enough contact points to create a qhull of the right dimensions, so create more that are very close to the existing ones
     local_frame_pos, max_radius = get_obj_info(oID)
     #sim uses center of mass as a reference for the Cartesian world transforms in getBasePositionAndOrientation
     obj_pos, obj_orn = p.getBasePositionAndOrientation(oID)
