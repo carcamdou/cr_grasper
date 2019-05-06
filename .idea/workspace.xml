@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b65014d3-297d-45db-8ec7-1a4cfae2e43c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/cr_grasper/grasper.py" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/grasper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handoff.md" beforeDir="false" afterPath="$PROJECT_DIR$/handoff.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision01.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision02.obj" beforeDir="false" />
@@ -55,13 +54,13 @@
           <entry key="LICENSE" value="19" />
           <entry key="dummy" value="46" />
           <entry key="ini" value="108" />
-          <entry key="md" value="7364" />
+          <entry key="md" value="7368" />
           <entry key="py" value="7478" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="7364" />
+          <entry key="Markdown" value="7368" />
           <entry key="PLAIN_TEXT" value="173" />
           <entry key="Python" value="7478" />
         </counts>
@@ -101,8 +100,8 @@
         <entry file="file://$PROJECT_DIR$/handoff.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="257">
-                <caret line="170" column="6" lean-forward="true" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
+              <first_editor relative-caret-position="311">
+                <caret line="81" column="4" lean-forward="true" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
               </first_editor>
               <second_editor />
             </state>
@@ -576,8 +575,8 @@
     <entry file="file://$PROJECT_DIR$/handoff.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="257">
-            <caret line="170" column="6" lean-forward="true" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
+          <first_editor relative-caret-position="311">
+            <caret line="81" column="4" lean-forward="true" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
           </first_editor>
           <second_editor />
         </state>

@@ -28,21 +28,21 @@ __Main Idea:__ Replace [Graspit!](https://graspit-simulator.github.io/) with a s
 * Time speedups possible if needed (C++, no GUI, etc)
 
 
-##Get Started: pick up and adapt this project from here
+## Get Started: pick up and adapt this project from here
 
 The attempt was to make this as OS independent as possible as well as remove dependencies from ROS and Gazebo. 
 <br>
 
 
-#####Some reading/researching to situate yourself in this project:
+##### Some reading/researching to situate yourself in this project:
 
-######Resources + Tools:
+###### Resources + Tools:
 Python 3.6 [Docs](https://docs.python.org/3/) <br>
 PyBullet [Homepage](https://pybullet.org/wordpress/) <br>
 * The documentation is limited somewhat to this [quickstart guide](https://docs.google.com/document/d/10sXEhzFRSnvFcl3XxNGhnD4N2SedqwdAvK3dsihxVUA/edit#heading=h.2ye70wns7io3)
 * Not everything from bullet has been transfered over to pybullet, but the system is built on Bullet Physics (C++, found [here](https://github.com/bulletphysics/bullet3) )
 URDF Overview [here](http://wiki.ros.org/urdf/Tutorials)
-######Theoretical background/papers:
+###### Theoretical background/papers:
 * Original GraspIt! 
     * Andrew Miller and Peter K. Allen, Graspit!: A Versatile Simulator for Robotic Grasping
     * Gives a good overview of the scope of this project 
