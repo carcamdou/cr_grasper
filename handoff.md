@@ -153,7 +153,7 @@ __To Use:__
     *  developing a model for a human-like dexterous hand
     *  give the hand some sensitivity for grasping; ie, force sensors for fingertips
     *  Add support for different types of hands - specifically parallel grippers and those with more than 3 fingers
-
+    *  A gradient grasp planner should lead to better results, as the current planner is based on randomized traversal of the sphere surrounding the object without any real optimizations based on prior grasp evaluations 
 * Replacing the GraspIt grasp planners
     * Eigengrasp Planner (which relies on hand posture space dimensionality reduction)
     * Database Planner (which relies on a huge database of pre-computed grasps to plan grasps for novel objects.)

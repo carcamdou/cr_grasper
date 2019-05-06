@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b65014d3-297d-45db-8ec7-1a4cfae2e43c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cr_grasper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cr_grasper.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cr_grasper/bh_config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/cr_grasper/bh_config.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handoff.md" beforeDir="false" afterPath="$PROJECT_DIR$/handoff.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision01.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pybullet_examples/bullet3/data/dinnerware/plate-collision02.obj" beforeDir="false" />
@@ -35,7 +38,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="1" />
-          <entry key="ini" value="13" />
+          <entry key="ini" value="14" />
           <entry key="md" value="4" />
           <entry key="obj" value="1" />
           <entry key="py" value="23" />
@@ -45,7 +48,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="19" />
+          <entry key="PLAIN_TEXT" value="20" />
           <entry key="Python" value="23" />
         </counts>
       </usages-collector>
@@ -53,16 +56,16 @@
         <counts>
           <entry key="LICENSE" value="19" />
           <entry key="dummy" value="46" />
-          <entry key="ini" value="108" />
-          <entry key="md" value="7368" />
-          <entry key="py" value="7478" />
+          <entry key="ini" value="130" />
+          <entry key="md" value="7598" />
+          <entry key="py" value="7480" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="7368" />
-          <entry key="PLAIN_TEXT" value="173" />
-          <entry key="Python" value="7478" />
+          <entry key="Markdown" value="7598" />
+          <entry key="PLAIN_TEXT" value="195" />
+          <entry key="Python" value="7480" />
         </counts>
       </usages-collector>
     </session>
@@ -75,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-108">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="-139">
+              <caret line="366" column="17" selection-start-line="366" selection-start-column="17" selection-end-line="366" selection-end-column="17" />
               <folding>
                 <element signature="e#959#979#0" expanded="true" />
               </folding>
@@ -96,12 +99,21 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cr_grasper/bh_config.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handoff.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="311">
-                <caret line="81" column="4" lean-forward="true" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
+              <first_editor relative-caret-position="183">
+                <caret line="155" column="208" selection-start-line="155" selection-start-column="208" selection-end-line="155" selection-end-column="208" />
               </first_editor>
               <second_editor />
             </state>
@@ -180,9 +192,9 @@
         <option value="$PROJECT_DIR$/cr_grasper/rotate.py" />
         <option value="$PROJECT_DIR$/cr_grasper/gws.py" />
         <option value="$PROJECT_DIR$/cr_grasper/write_config.py" />
-        <option value="$PROJECT_DIR$/cr_grasper/bh_config.ini" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/cr_grasper/grasper.py" />
+        <option value="$PROJECT_DIR$/cr_grasper/bh_config.ini" />
         <option value="$PROJECT_DIR$/handoff.md" />
       </list>
     </option>
@@ -215,6 +227,41 @@
             <path>
               <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
               <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectURDFs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectURDFs" type="462c0819:PsiDirectoryNode" />
+              <item name="cube" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectURDFs" type="462c0819:PsiDirectoryNode" />
+              <item name="jenga" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectURDFs" type="462c0819:PsiDirectoryNode" />
+              <item name="lego" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectURDFs" type="462c0819:PsiDirectoryNode" />
+              <item name="plate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectURDFs" type="462c0819:PsiDirectoryNode" />
+              <item name="sphere" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cr_grasper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cr_grasper" type="462c0819:PsiDirectoryNode" />
               <item name="rm_images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -226,7 +273,7 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/carlyndougherty/PycharmProjects/cr_grasper/README.md" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -404,19 +451,19 @@
     <frame x="58" y="23" width="1382" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.11682586" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.87102807" visible="true" weight="0.11682586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.12897196" side_tool="true" weight="0.25581396" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.32939634" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49889788" visible="true" weight="0.32939634" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" visible="true" weight="0.32939634" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50110215" side_tool="true" visible="true" weight="0.32939634" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -528,13 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/bh_config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ObjectURDFs/jenga/jenga.obj">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -552,16 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#959#979#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -572,11 +602,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/bh_config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cr_grasper/grasper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-139">
+          <caret line="366" column="17" selection-start-line="366" selection-start-column="17" selection-end-line="366" selection-end-column="17" />
+          <folding>
+            <element signature="e#959#979#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/handoff.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="311">
-            <caret line="81" column="4" lean-forward="true" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="4" />
+          <first_editor relative-caret-position="183">
+            <caret line="155" column="208" selection-start-line="155" selection-start-column="208" selection-end-line="155" selection-end-column="208" />
           </first_editor>
           <second_editor />
         </state>
